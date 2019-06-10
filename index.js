@@ -1,4 +1,8 @@
-class SliceUp {
+export function max(id) {
+    return {"Max": id}
+}
+
+export class SliceUp {
     constructor(tok) {
         this.path = path;        
         this.query = {
@@ -21,5 +25,3 @@ class SliceUp {
 	return await post('http://test.sliceup.co/query', this.query);
     }
 }
-
-export default SliceUp;
