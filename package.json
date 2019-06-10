@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "SliceUp API for Node",
   "main": "sliceup.js",
-  "repository": "https://github.com/sliceup/sliceup-node",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliceup/sliceup-node.git"
+  },
   "author": "SliceUp, Inc <hello@sliceup.co>",
   "license": "BSD-2-Clause",
   "private": false,
@@ -12,5 +15,11 @@
   },
   "dependencies": {
     "axios": "^0.19.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/sliceup/sliceup-node/issues"
+  },
+  "homepage": "https://github.com/sliceup/sliceup-node#readme",
+  "devDependencies": {},
+  "keywords": []
 }
