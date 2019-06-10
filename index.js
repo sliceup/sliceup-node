@@ -22,6 +22,4 @@ class SliceUp {
     }
 }
 
-module.exports = {
-	SliceUp
-}
+export default SliceUp;
