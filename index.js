@@ -1,10 +1,7 @@
-export function max(id) {
-    return {"Max": id}
-}
+const axios = require('axios');
 
-export class SliceUp {
-    constructor(tok) {
-        this.path = path;        
+module.exports = class SliceUp {
+    constructor() {
         this.query = {
             'select': [],
             'from': [],
@@ -22,6 +19,7 @@ export class SliceUp {
     }
 
     async exec() {
-	return await post('http://test.sliceup.co/query', this.query);
+        return await axios.post('http://test.sliceup.co/query', this.query);
     }
 }
+

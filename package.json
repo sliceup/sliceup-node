@@ -20,6 +20,8 @@
     "url": "https://github.com/sliceup/sliceup-node/issues"
   },
   "homepage": "https://github.com/sliceup/sliceup-node#readme",
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  },
   "keywords": []
 }
