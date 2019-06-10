@@ -1,6 +1,4 @@
-import post from 'axios';
-
-class SliceUp {
+export class SliceUp {
     constructor(tok) {
         this.path = path;        
         this.query = {
