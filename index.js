@@ -1,4 +1,4 @@
-export class SliceUp {
+class SliceUp {
     constructor(tok) {
         this.path = path;        
         this.query = {
@@ -17,7 +17,11 @@ export class SliceUp {
         return this;
     }
 
-    exec() {
-        return await post('http://test.sliceup.co/query', this.query);
+    async exec() {
+	return await post('http://test.sliceup.co/query', this.query);
     }
+}
+
+module.exports = {
+	SliceUp
 }

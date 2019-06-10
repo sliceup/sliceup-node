@@ -1,6 +1,6 @@
 {
-  "name": "sliceup",
-  "version": "1.0.0",
+  "name": "slicey",
+  "version": "1.0.1",
   "description": "SliceUp API for Node",
   "main": "index.js",
   "repository": {
