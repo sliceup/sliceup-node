@@ -2,7 +2,7 @@
   "name": "sliceup",
   "version": "1.0.0",
   "description": "SliceUp API for Node",
-  "main": "sliceup.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sliceup/sliceup-node.git"
