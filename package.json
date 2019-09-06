@@ -1,6 +1,6 @@
 {
-  "name": "sliceupp",
-  "version": "1.0.3",
+  "name": "sliceup",
+  "version": "0.0.4",
   "description": "Node library for SliceUp API",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "sliceup"
   ],
   "author": "SliceUp, Inc.",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/sliceup/sliceup-node/issues"
   },
