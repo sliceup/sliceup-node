@@ -8,7 +8,7 @@ function query(cmd) {
     sliceup.query(cmd).then(data => {
         console.log(data);
     }).catch(err => {
-        console.log('Error: ' + err.response.data);
+        console.log(err);
     });
 }
 

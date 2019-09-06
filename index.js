@@ -4,47 +4,64 @@ const { eq, neq, lt, lte, gt,
         min, max, count, id} = require('./functions.js');
 
 class SliceUp {
-    constructor(ip) {
-        this.url = 'http://' + ip + ':8080/';
-    }
-
-    async delete(name) {
-        let rsp = await axios.post(this.url + 'delete', { name: name });
-        return rsp.data;
-    }
-
-    async query(cmd) {
-        for (let i = 0; i < cmd.select.length; i++) {
-            let e = cmd.select[i];
-            if (typeof e === 'string') {
-                cmd.select[i] = id(e);
-            }
-        }
-        if (cmd['by'] !== undefined) {
-            for (let i = 0; i < cmd.by.length; i++) {
-                let e = cmd.by[i];
-                if (typeof e === 'string') {
-                    cmd.by[i] = id(e);
-                }
-            }
-        }
-        let rsp = await axios.post(this.url + 'query', cmd);
-        return rsp.data;
+    constructor(ip, port) {
+        port = typeof port !== 'undefined' ? port : '8080';
+        this.host = 'http://' + ip + ':' + port + '/';
     }
 
     async create(config) {
-        let rsp = await axios.post(this.url + 'create', config);
-        return rsp.data;
-    }
-
-    async insert(data) {
-        let rsp = await axios.post(this.url + 'insert', data);
-        return rsp.data;
+        return await this._post_request('create', config);
     }
 
     async summary() {
-        let rsp = await axios.get(this.url + 'summary');
-        return rsp.data.Ok;
+        return await this._get_request('summary');
+    }
+
+    async insert(data) {
+        return await this._post_request('insert', data);
+    }
+
+    async describe(name) {
+        return await this._post_request('describe', { name: name });
+    }
+
+    async query(cmd) {
+        cmd = this._process_args('select', cmd);
+        cmd = this._process_args('by', cmd);
+        cmd = this._process_from(cmd);
+        return await this._post_request('query', cmd);
+    }
+
+    async _get_request(method, payload) {
+        const rsp = await axios.get(this.host + method, payload);
+        return rsp.data;
+    }
+
+    async _post_request(method, payload) {
+        const rsp = await axios.post(this.host + method, payload);
+        return rsp.data;
+    }
+
+    _process_args(key, cmd) {
+        if (cmd.hasOwnProperty(key)) {
+            const p = cmd[key];
+            for (let i = 0; i < p.length; i++) {
+                if (typeof p[i] === 'string') {
+                    cmd[key][i] = id(p[i]);
+                }
+            }
+        }
+        return cmd;
+    }
+
+    _process_from(cmd) {
+        if (cmd.hasOwnProperty('from')) {
+            const f = cmd.from;
+            if (typeof f === 'string') {
+                cmd.from = {'Table': f}
+            }
+        }
+        return cmd;
     }
 }
 
@@ -57,6 +74,7 @@ module.exports = {
     gt: gt,
     gte: gte,
     slice: slice,
+    avg: avg,
     sum: sum,
     min: min,
     max: max,
