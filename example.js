@@ -8,7 +8,13 @@ function query(cmd) {
     sliceup.query(cmd).then(data => {
         console.log(data);
     }).catch(err => {
-        console.log(err);
+        console.log('Request: ' + err.config.data);
+        if (typeof err.response !== 'undefined'){
+            console.log('Error: ' + err.response);
+        }
+        else {
+            console.log(err.toString());
+        }
     });
 }
 

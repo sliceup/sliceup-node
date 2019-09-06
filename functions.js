@@ -1,67 +1,69 @@
-function eq(lhs, rhs) {
-    return { 'Eq': [{ 'Id': lhs }, { 'Long': rhs }] }
-}
-
-function neq(lhs, rhs) {
-    return { 'Neq': [{ 'Id': lhs }, { 'Long': rhs }] }
-}
-
-function lt(lhs, rhs) {
-    return { 'Lt': [{ 'Id': lhs }, { 'Long': rhs }] }
-}
-
-function lte(lhs, rhs) {
-    return { 'Lte': [{ 'Id': lhs }, { 'Long': rhs }] }
-}
-
-function gt(lhs, rhs) {
-    return { 'Gt': [{ 'Id': lhs }, { 'Long': rhs }] }
-}
-
-function gte(lhs, rhs) {
-    return { 'Gte': [{ 'Id': lhs }, { 'Long': rhs }] }
-}
-
-function slice(lhs) {
-    return { 'Slice': [{ 'Id': lhs }, { 'Time': '00:00:02' }] }
+function id(name) {
+    return { 'Id': name }
 }
 
 function avg(expr) {
-    return { 'Avg': { 'Id': expr } }
+    return { 'Avg': _to_id(expr) }
 }
 
 function sum(expr) {
-    return { 'Sum': { 'Id': expr } }
-}
-
-function min(expr) {
-    return { 'Min': { 'Id': expr } }
-}
-
-function max(expr) {
-    return { 'Max': { 'Id': expr } }
+    return { 'Sum': _to_id(expr) }
 }
 
 function count(expr) {
-    return { 'Count': { 'Id': expr } }
+    return { 'Count': _to_id(expr) }
 }
 
-function id(expr) {
-    return { 'Id': expr }
+function last(expr) {
+    return { 'Count': _to_id(expr) }
+}
+
+function max(expr) {
+    return { 'Max': _to_id(expr) }
+}
+
+function min(expr) {
+    return { 'Min': _to_id(expr) }
+}
+
+function year(expr) {
+    return { 'Year': _to_id(expr) }
+
+}
+
+function month(expr) {
+    return { 'Month': _to_id(expr) }
+
+}
+
+function time(h, m, s) {
+    h = h.toString().padStart(2, "0");
+    m = m.toString().padStart(2, "0");
+    s = s.toString().padStart(2, "0");
+    return {'Time': h + ':' + m + ':' + s}
+}
+
+function bar(lhs, rhs) {
+    return { 'Bar': [_to_id(lhs)], rhs }
+}
+
+function _to_id(expr) {
+    if (typeof expr === 'string') {
+        expr = id(expr)
+    }
+    return expr
 }
 
 module.exports = {
-    eq: eq,
-    neq: neq,
-    lt: lt,
-    lte: lte,
-    gt: gt,
-    gte: gte,
-    slice: slice,
+    id: id,
     avg: avg,
     sum: sum,
-    min: min,
-    max: max,
     count: count,
-    id: id
+    last: last,
+    max: max,
+    min: min,
+    year: year,
+    month: month,
+    time: time,
+    bar: bar
 };

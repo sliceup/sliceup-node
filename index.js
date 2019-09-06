@@ -1,7 +1,7 @@
 const axios = require('axios');
-const { eq, neq, lt, lte, gt,
-        gte, slice, avg, sum,
-        min, max, count, id} = require('./functions.js');
+const { id, avg, sum, count,
+        last, max, min, year,
+        month, time, bar } = require('./functions.js');
 
 class SliceUp {
     constructor(ip, port) {
@@ -67,17 +67,15 @@ class SliceUp {
 
 module.exports = {
     SliceUp: SliceUp,
-    eq: eq,
-    neq: neq,
-    lt: lt,
-    lte: lte,
-    gt: gt,
-    gte: gte,
-    slice: slice,
+    id: id,
     avg: avg,
     sum: sum,
-    min: min,
-    max: max,
     count: count,
-    id: id
+    last: last,
+    max: max,
+    min: min,
+    year: year,
+    month: month,
+    time: time,
+    bar: bar
 };
