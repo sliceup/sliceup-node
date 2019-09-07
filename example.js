@@ -8,7 +8,6 @@ function query(cmd) {
     sliceup.query(cmd).then(data => {
         console.log(data);
     }).catch(err => {
-        console.log('Request: ' + err.config.data);
         if (typeof err.response !== 'undefined'){
             console.log('Error: ' + err.response);
         }
@@ -18,17 +17,32 @@ function query(cmd) {
     });
 }
 
+function summary() {
+    sliceup.summary().then(data => {
+        console.log(data);
+    }).catch(err => {
+        if (typeof err.response !== 'undefined'){
+            console.log('Error: ' + err.response);
+        }
+        else {
+            console.log(err.toString());
+        }
+    });
+}
+
+summary();
+
 query({
-    'select': [count('bid_qty')],
+    'select': [count('time')],
     'from': 'demo',
 });
 
 query({
-    'select': ['bid_qty', 'bid_qty', 'ask_qty', 'ask_price'],
+    'select': ['time', 'qty', 'price'],
     'from': 'demo',
 });
 
 query({
-    'select': [sum('bid_price')],
+    'select': [sum('price')],
     'from': 'demo',
 });
