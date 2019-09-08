@@ -15,7 +15,7 @@ function count(expr) {
 }
 
 function last(expr) {
-    return { 'Count': _to_id(expr) }
+    return { 'Last': _to_id(expr) }
 }
 
 function max(expr) {
