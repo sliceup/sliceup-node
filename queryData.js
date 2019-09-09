@@ -1,13 +1,16 @@
 const { ValueViewerSymbol } = require("@runkit/value-viewer");
 
+const cssURL = "https://sliceup.sfo2.digitaloceanspaces.com/dataTable.css";
+
 function produceTableHtml(headers, data, duration) {
-    let html = '<div class="data_table"><table><theader><tr>';
+    let html = '<link rel="stylesheet" href="' + cssURL +'">';
+    html += '<div class="data_table"><table><thead><tr>';
 
     headers.forEach(function(header) {
         html += '<th>' + header + '</th>'
     });
 
-    html += '</tr></theader><tbody>';
+    html += '</tr></thead><tbody>';
 
     data.forEach(function(row) {
         html += '<tr>';
@@ -18,7 +21,7 @@ function produceTableHtml(headers, data, duration) {
     });
 
     html += '</tbody><tfoot><tr>';
-    html += '<td colspan="' + headers.length + '">' + duration + '</td>';
+    html += '<td colspan="' + headers.length + '">Duration: ' + duration + '</td>';
     html += '</tr></tfoot></table></div>';
 
     return html;
@@ -45,7 +48,6 @@ class QueryData
       };
   }
 }
-
 
 module.exports = {
     QueryData: QueryData
