@@ -1,6 +1,6 @@
 const { ValueViewerSymbol } = require("@runkit/value-viewer");
 
-class DataViewer
+class QueryData
 {
   constructor(data) {
     this.data = data.data;
@@ -10,7 +10,7 @@ class DataViewer
 
   chart()
   {
-      const title = "DataViewer";
+      const title = "QueryData";
       let html = '<div class="data_table"><table><theader><tr>';
     
       this.headers.forEach(function(header) {
@@ -40,5 +40,5 @@ class DataViewer
 
 
 module.exports = {
-    DataViewer: DataViewer
+    QueryData: QueryData
 }
