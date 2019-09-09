@@ -2,30 +2,40 @@ const { ValueViewerSymbol } = require("@runkit/value-viewer");
 
 class DataViewer
 {
-  constructor(result)
+  constructor(data) {
+    this.data = data.data;
+    this.headers = data.headers;
+    this.duration = data.duration;
+  }
+
+  chart()
   {
-      const { data, duration, headers } = result;
       const title = "DataViewer";
-      let HTML = '<div class="data_table"><table><theader><tr>';
+      let html = '<div class="data_table"><table><theader><tr>';
     
-      headers.forEach(function(header) {
-        HTML += '<th>' + header + '</th>'
+      this.headers.forEach(function(header) {
+        html += '<th>' + header + '</th>'
       });
         
-      HTML += '</tr></theader><tbody>';
+      html += '</tr></theader><tbody>';
               
-      data.forEach(function(row) {
-        HTML += '<tr>';
+      this.data.forEach(function(row) {
+        html += '<tr>';
         row.forEach(function(column) {
-            HTML += '<td>' + column + '</td>';
+          html += '<td>' + column + '</td>';
         });    
-        HTML += '</tr>';
+        html += '</tr>';
       });     
               
-      HTML += '</tbody></table></div>';
+      html += '</tbody></table></div>';
       
-      Object.assign(this, result, { [ValueViewerSymbol]: { title, HTML } });
-    }
+      return {
+        [ValueViewerSymbol]: {
+            title: title,
+            HTML: html
+        }
+      };
+  }
 }
 
 
