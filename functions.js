@@ -44,7 +44,7 @@ function time(h, m, s) {
 }
 
 function bar(lhs, rhs) {
-    return { 'Bar': [_to_id(lhs)], rhs }
+    return { 'Bar': [_to_id(lhs), rhs] }
 }
 
 function _to_id(expr) {
