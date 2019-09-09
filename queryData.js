@@ -1,5 +1,29 @@
 const { ValueViewerSymbol } = require("@runkit/value-viewer");
 
+function produceTableHtml(headers, data, duration) {
+    let html = '<div class="data_table"><table><theader><tr>';
+
+    headers.forEach(function(header) {
+        html += '<th>' + header + '</th>'
+    });
+
+    html += '</tr></theader><tbody>';
+
+    data.forEach(function(row) {
+        html += '<tr>';
+        row.forEach(function(column) {
+            html += '<td>' + column + '</td>';
+        });
+        html += '</tr>';
+    });
+
+    html += '</tbody><tfoot><tr>';
+    html += '<td colspan="' + headers.length + '">' + duration + '</td>';
+    html += '</tr></tfoot></table></div>';
+
+    return html;
+}
+
 class QueryData
 {
   constructor(data) {
@@ -8,26 +32,10 @@ class QueryData
     this.duration = data.duration;
   }
 
-  chart()
+  visualize()
   {
       const title = "QueryData";
-      let html = '<div class="data_table"><table><theader><tr>';
-    
-      this.headers.forEach(function(header) {
-        html += '<th>' + header + '</th>'
-      });
-        
-      html += '</tr></theader><tbody>';
-              
-      this.data.forEach(function(row) {
-        html += '<tr>';
-        row.forEach(function(column) {
-          html += '<td>' + column + '</td>';
-        });    
-        html += '</tr>';
-      });     
-              
-      html += '</tbody></table></div>';
+      const html = produceTableHtml(this.headers, this.data, this.duration);
       
       return {
         [ValueViewerSymbol]: {
@@ -41,4 +49,4 @@ class QueryData
 
 module.exports = {
     QueryData: QueryData
-}
+};
