@@ -1,3 +1,5 @@
+const { isBool, isInt, isFloat, isString } = require('./helpers.js');
+
 // Unary functions
 
 function id(name) {
@@ -122,19 +124,24 @@ function gte(lhs, rhs) {
 // Helpers
 
 function toId(arg) {
-    if (typeof arg === 'string') {
+    if (isString(arg)) {
         arg = id(arg)
     }
     return arg
 }
 
 function toTypedExpresion(arg) {
+    if (isBool(arg)) {
+        return bool(arg)
+    } else if (isInt(arg)) {
+        return int(arg)
+    } else if (isFloat(arg)) {
+        return float(arg)
+    } else if (isString(arg)) {
+        return str(arg)
+    }
+
     return arg
-}
-
-
-function is_int(arg) {
-    Number.isInteger(arg)
 }
 
 module.exports = {
