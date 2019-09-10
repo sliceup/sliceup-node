@@ -60,7 +60,7 @@ function month(arg) {
 }
 
 function str(arg) {
-    return { 'String': arg }
+    return { 'Str': arg }
 }
 
 function sum(arg) {
@@ -153,12 +153,18 @@ module.exports = {
     count: count,
     datetime: datetime,
     dev: dev,
+    eq: eq,
     float: float,
+    gt: gt,
+    gte: gte,
     int: int,
     last: last,
+    lt: lt,
+    lte: lte,
     max: max,
     min: min,
     month: month,
+    neq: neq,
     str: str,
     sum: sum,
     sums: sums,
