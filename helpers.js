@@ -3,11 +3,11 @@ function isBool(arg) {
 }
 
 function isInt(arg) {
-    Number.isInteger(arg)
+    return Number.isInteger(arg)
 }
 
 function isFloat(arg) {
-    return arg % 1 !== 0
+    return Number(arg) === arg && arg % 1 !== 0
 }
 
 function isString(arg) {
