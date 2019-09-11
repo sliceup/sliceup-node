@@ -1,8 +1,8 @@
-const { SliceUp, count, sum } = require('./index.js');
+const { Sliceup, count, sum } = require('./index.js');
 
 console.log('Welcome to SliceUp client!');
 
-const sliceup = new SliceUp('198.211.104.225');
+const sliceup = new Sliceup('198.211.104.225');
 
 function query(cmd) {
     sliceup.query(cmd).then(data => {
