@@ -1,9 +1,9 @@
-const { Sliceup } = require('./sliceup');
+const { Sliceup } = require('./src/sliceup');
 const { id, last, sum, str, bar, time,
         unique, max, eq, float, datetime,
         dev, neq, month, lt, count, variance,
         alias, gte, lte, avg, min, bool,
-        year, sums, gt, int } = require('./functions.js');
+        year, sums, gt, int } = require('./src/functions.js');
 
 module.exports = {
     Sliceup: Sliceup,

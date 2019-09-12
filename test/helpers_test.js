@@ -2,7 +2,7 @@ const {describe, it} = require('mocha');
 
 const assert = require('assert');
 
-const { isBool, isInt, isFloat, isString } = require('../helpers.js');
+const { isBool, isInt, isFloat, isString } = require('../src/helpers.js');
 
 describe('Helpers', function() {
     describe('#isBool()', function() {
