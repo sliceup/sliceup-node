@@ -26,6 +26,7 @@ class Sliceup {
 
     async query(cmd) {
         cmd = this._process_args('select', cmd);
+        cmd = this._process_args('where', cmd);
         cmd = this._process_args('by', cmd);
         cmd = this._process_from(cmd);
         return new QueryData(await this._post_request('query', cmd));
@@ -43,10 +44,12 @@ class Sliceup {
 
     _process_args(key, cmd) {
         if (cmd.hasOwnProperty(key)) {
-            const p = cmd[key];
-            for (let i = 0; i < p.length; i++) {
-                if (typeof p[i] === 'string') {
-                    cmd[key][i] = id(p[i]);
+            if(!Array.isArray(cmd[key])) {
+                cmd[key] = [cmd[key]];
+            }
+            for (let i = 0; i < cmd[key].length; i++) {
+                if (typeof cmd[key][i] === 'string') {
+                    cmd[key][i] = id(cmd[key][i]);
                 }
             }
         }
