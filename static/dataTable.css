@@ -1,0 +1,37 @@
+.data_table{
+    background: #fff;
+    padding: 2rem 4rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+.data_table table{
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.data_table table > thead > tr > th {
+    font-size: 1.3rem;
+    color: #fff;
+    line-height: 2rem;
+    background-color: #9932CC;
+    text-align: center;
+}
+.data_table table > tbody > tr > td {
+    font-size: 1rem;
+    color: #383838;
+    line-height: 1.4rem;
+    text-align: center;
+}
+.data_table table > tbody > tr:nth-child(even) {
+    background: #f8f6ff;
+}
+
+.data_table table > tfoot > tr > td {
+    padding: 0 2rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: right;
+    color: #fff;
+    line-height: 2rem;
+    background-color: rgba(153, 50, 204, 0.5);
+}

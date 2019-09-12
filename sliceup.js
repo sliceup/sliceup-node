@@ -1,5 +1,6 @@
 const axios = require('axios');
 const { id } = require('./functions.js');
+const { QueryData } = require('./queryData.js');
 
 class Sliceup {
     constructor(ip, port) {
@@ -27,7 +28,7 @@ class Sliceup {
         cmd = this._process_args('select', cmd);
         cmd = this._process_args('by', cmd);
         cmd = this._process_from(cmd);
-        return await this._post_request('query', cmd);
+        return new QueryData(await this._post_request('query', cmd));
     }
 
     async _get_request(method, payload) {
