@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>sliceup.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QueryData.html">QueryData</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QueryData.html#visualize">visualize</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Sliceup.html">Sliceup</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Sliceup.html#create">create</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Sliceup.html#describe">describe</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Sliceup.html#insert">insert</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Sliceup.html#query">query</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Sliceup.html#summary">summary</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#add">add</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#alias">alias</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#avg">avg</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#bar">bar</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#bool">bool</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#count">count</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#datetime">datetime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#dev">dev</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#div">div</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#ema">ema</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#eq">eq</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#float">float</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#gt">gt</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#gte">gte</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#id">id</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#int">int</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#last">last</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#lt">lt</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#lte">lte</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#mavg">mavg</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#max">max</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#mdev">mdev</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#min">min</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#month">month</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#mul">mul</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#neq">neq</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#str">str</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#sub">sub</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#sum">sum</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#sums">sums</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#time">time</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#unique">unique</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#variance">variance</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#year">year</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">sliceup.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const axios = require('axios');
+const { id } = require('./functions.js');
+const { QueryData } = require('./queryData.js');
+
+/** @class Represents SliceUp client. */
+class Sliceup {
+
+    /**
+     * Creates a Sliceup client.
+     *
+     * @param {string} ip            Connection ip address.
+     * @param {string} [port='8080'] Connection port.
+     */
+    constructor(ip, port) {
+        port = typeof port !== 'undefined' ? port : '8080';
+        this.host = 'http://' + ip + ':' + port + '/';
+    }
+
+    /**
+     * Creates the table.
+     *
+     * Creates the table with the given parameters in the database.
+     *
+     * @param {object} config New table configuration.
+     * @returns {Promise&lt;object>}
+     */
+    async create(config) {
+        return await this._post_request('create', config);
+    }
+
+    /**
+     * Summarizes the database.
+     *
+     * Summarizes the database configuration.
+     *
+     * @returns {Promise&lt;object>}
+     */
+    async summary() {
+        return await this._get_request('summary');
+    }
+
+    /**
+     * Inserts the data.
+     *
+     * Inserts the given data into the database.
+     *
+     * @param {object} data New row data.
+     * @returns {Promise&lt;object>}
+     */
+    async insert(data) {
+        return await this._post_request('insert', data);
+    }
+
+    /**
+     * @param {string} name
+     * @returns {Promise&lt;object>}
+     */
+    async describe(name) {
+        return await this._post_request('describe', { name: name });
+    }
+
+    /**
+     * Queries the data.
+     *
+     * Queries the database using the given parameters.
+     *
+     * @param {object} cmd Query parameters.
+     * @returns {Promise&lt;QueryData>}
+     */
+    async query(cmd) {
+        cmd = this._process_args('select', cmd);
+        cmd = this._process_args('by', cmd);
+        cmd = this._process_from(cmd);
+        return new QueryData(await this._post_request('query', cmd));
+    }
+
+    async _get_request(method, payload) {
+        const rsp = await axios.get(this.host + method, payload);
+        return rsp.data;
+    }
+
+    async _post_request(method, payload) {
+        const rsp = await axios.post(this.host + method, payload);
+        return rsp.data;
+    }
+
+    _process_args(key, cmd) {
+        if (cmd.hasOwnProperty(key)) {
+            const p = cmd[key];
+            for (let i = 0; i &lt; p.length; i++) {
+                if (typeof p[i] === 'string') {
+                    cmd[key][i] = id(p[i]);
+                }
+            }
+        }
+        return cmd;
+    }
+
+    _process_from(cmd) {
+        if (cmd.hasOwnProperty('from')) {
+            const f = cmd.from;
+            if (typeof f === 'string') {
+                cmd.from = {'Table': f}
+            }
+        }
+        return cmd;
+    }
+}
+
+module.exports = {
+    Sliceup: Sliceup
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Fri Sep 13 2019 22:17:57 GMT+0200 (CEST) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
