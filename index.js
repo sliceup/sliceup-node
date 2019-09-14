@@ -5,6 +5,10 @@ const { id, last, sum, str, bar, time,
         alias, gte, lte, avg, min, bool,
         year, sums, gt, int } = require('./src/functions.js');
 
+/**
+ * Sliceup client.
+ * @module sliceup
+ */
 module.exports = {
     Sliceup: Sliceup,
     id: id,

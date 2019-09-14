@@ -27,26 +27,37 @@ function produceTableHtml(headers, data, duration) {
     return html;
 }
 
+/** @class Represents data returned by database queries. */
 class QueryData
 {
-  constructor(data) {
-    this.data = data.data;
-    this.headers = data.headers;
-    this.duration = data.duration;
-  }
+    /**
+     * Creates QueryData object.
+     *
+     * @param {object} data Query result.
+     */
+    constructor(data) {
+        this.data = data.data;
+        this.headers = data.headers;
+        this.duration = data.duration;
+    }
 
-  visualize()
-  {
-      const title = "QueryData";
-      const html = produceTableHtml(this.headers, this.data, this.duration);
-      
-      return {
-        [ValueViewerSymbol]: {
-            title: title,
-            HTML: html
-        }
-      };
-  }
+    /**
+     * Creates RunKit's ValueViewer object.
+     *
+     * @returns {object} {[ValueViewerSymbol]: object}
+     */
+    visualize()
+    {
+        const title = "QueryData";
+        const html = produceTableHtml(this.headers, this.data, this.duration);
+
+        return {
+            [ValueViewerSymbol]: {
+                title: title,
+                HTML: html
+            }
+        };
+    }
 }
 
 module.exports = {
