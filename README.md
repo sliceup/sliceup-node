@@ -1,5 +1,7 @@
 # Sliceup
 
+![npm](https://img.shields.io/npm/v/sliceup) ![npm](https://img.shields.io/npm/dt/sliceup) ![GitHub](https://img.shields.io/github/license/sliceup/sliceup-node)
+
 NodeJS client of the SliceUp API
 
 Installing
