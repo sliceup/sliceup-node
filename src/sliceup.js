@@ -1,5 +1,4 @@
 const axios = require('axios');
-const { id } = require('./functions.js');
 const { QueryData } = require('./queryData.js');
 
 /** @class Represents SliceUp client. */
@@ -25,7 +24,7 @@ class Sliceup {
      * @returns {Promise<object>}
      */
     async create(config) {
-        return await this._post_request('create', config);
+        return await this._postRequest('create', config);
     }
 
     /**
@@ -36,7 +35,7 @@ class Sliceup {
      * @returns {Promise<object>}
      */
     async summary() {
-        return await this._get_request('summary');
+        return await this._getRequest('summary');
     }
 
     /**
@@ -48,7 +47,20 @@ class Sliceup {
      * @returns {Promise<object>}
      */
     async insert(data) {
-        return await this._post_request('insert', data);
+        return await this._postRequest('insert', data);
+    }
+
+    /**
+     * Inserts the data.
+     *
+     * Inserts the given data into the database.
+     *
+     * @param {object} data New row data.
+     * @returns {Promise<object>}
+     */
+    async delete(cmd) {
+        cmd = processDeleteArgs(cmd);
+        return await this._postRequest('delete', cmd);
     }
 
     /**
@@ -56,7 +68,7 @@ class Sliceup {
      * @returns {Promise<object>}
      */
     async describe(name) {
-        return await this._post_request('describe', { name: name });
+        return await this._postRequest('describe', { name: name });
     }
 
     /**
@@ -68,46 +80,67 @@ class Sliceup {
      * @returns {Promise<QueryData>}
      */
     async query(cmd) {
-        cmd = this._process_args('select', cmd);
-        cmd = this._process_args('where', cmd);
-        cmd = this._process_args('by', cmd);
-        cmd = this._process_from(cmd);
-        return new QueryData(await this._post_request('query', cmd));
+        cmd = processQueryArgs(cmd);
+        return new QueryData(await this._postRequest('query', cmd));
     }
 
-    async _get_request(method, payload) {
+    async _getRequest(method, payload) {
         const rsp = await axios.get(this.host + method, payload);
         return rsp.data;
     }
 
-    async _post_request(method, payload) {
+    async _postRequest(method, payload) {
         const rsp = await axios.post(this.host + method, payload);
         return rsp.data;
     }
+}
 
-    _process_args(key, cmd) {
+// Args processing
+
+function processQueryArgs(cmd) {
+    const columnArgs = ['select', 'where', 'by'];
+    for (let key of columnArgs) {
         if (cmd.hasOwnProperty(key)) {
-            if(!Array.isArray(cmd[key])) {
-                cmd[key] = [cmd[key]];
-            }
+            cmd[key] = toArgsArray(cmd[key]);
             for (let i = 0; i < cmd[key].length; i++) {
                 if (typeof cmd[key][i] === 'string') {
-                    cmd[key][i] = id(cmd[key][i]);
+                    cmd[key][i] = toId(cmd[key][i]);
                 }
             }
         }
-        return cmd;
     }
 
-    _process_from(cmd) {
-        if (cmd.hasOwnProperty('from')) {
-            const f = cmd.from;
-            if (typeof f === 'string') {
-                cmd.from = {'Table': f}
-            }
-        }
-        return cmd;
+    const fromKey = 'from';
+    if (cmd.hasOwnProperty(fromKey)) {
+        cmd[fromKey] = toTable(cmd[fromKey]);
     }
+
+    return cmd;
+}
+
+function processDeleteArgs(cmd) {
+    return toArgsArray(cmd);
+}
+
+function toArgsArray(cmd) {
+    if(!Array.isArray(cmd)) {
+        cmd = [cmd];
+    }
+    return cmd;
+}
+
+function toTable(name) {
+    if (typeof name === 'string') {
+        name = {'Table': name};
+    }
+    return name
+}
+
+function toId(name) {
+    if (typeof name === 'string') {
+        name = {'Id': name};
+    }
+    return name
 }
 
 module.exports = {
