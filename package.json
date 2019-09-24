@@ -24,10 +24,10 @@
   "dependencies": {
     "axios": "^0.19.0",
     "do-wrapper": "^3.22.1",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "@runkit/value-viewer": "^1.0.0"
   },
   "devDependencies": {
-    "@runkit/value-viewer": "^1.0.0",
     "eslint": "^6.3.0",
     "jsdoc": "^3.6.3",
     "minami": "^1.2.3",
