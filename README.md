@@ -32,7 +32,7 @@ const sliceup = new Sliceup('demo.sliceup.co');
 
 sliceup.summary()
 .then(response => console.log(response))
-.catch(error => console.log(error));
+.catch(error => console.error(error));
 ```
 
 ### Create a table
@@ -52,7 +52,7 @@ sliceup.create({
     'recreate': true
 })
 .then(response => console.log(response))
-.catch(error => console.log(error));
+.catch(error => console.error(error));
 ```
 
 ### Insert data
@@ -76,7 +76,7 @@ sliceup.insert({
     ]
 })
 .then(response => console.log(response))
-.catch(error => console.log(error));
+.catch(error => console.error(error));
 ```
 
 ### Query data
@@ -92,7 +92,7 @@ sliceup.query({
     'from': 'orders'
 })
 .then(response => console.log(response))
-.catch(error => console.log(error));
+.catch(error => console.error(error));
 ```
 
 #### Visualize data
@@ -107,7 +107,7 @@ sliceup.query({
 .then(response => {
     response.visualize()
 })
-.catch(error => console.log(error));
+.catch(error => console.error(error));
 ```
 
 #### Query table statistics
@@ -120,7 +120,7 @@ sliceup.query({
    'from': 'orders'
 })
 .then(response => console.log(response))
-.catch(error => console.log(error));
+.catch(error => console.error(error));
 ```
 
 #### Slice the data into hour buckets
@@ -134,7 +134,7 @@ sliceup.query({
   'from': 'orders'
 })
 .then(response => console.log(response))
-.catch(error => console.log(error));
+.catch(error => console.error(error));
 ```
 
 #### Slice and group the quantity by bars of 2
@@ -148,7 +148,7 @@ sliceup.query({
    'from': 'orders'
 })
 .then(response => console.log(response))
-.catch(error => console.log(error));
+.catch(error => console.error(error));
 ```
 
 ### Delete tables
@@ -160,7 +160,7 @@ const sliceup = new s.Sliceup('demo.sliceup.co');
 
 sliceup.delete('orders')
 .then(response => console.log(response))
-.catch(error => console.log(error));
+.catch(error => console.error(error));
 ```
 
 Docs

@@ -12,6 +12,9 @@ class Sliceup {
     constructor(ip, port) {
         port = typeof port !== "undefined" ? port : "8080";
         this.host = `http://${ip}:${port}/`;
+
+        // Host health check
+        this.summary().catch(error => console.error(error));
     }
 
     /**
@@ -83,15 +86,29 @@ class Sliceup {
         return new QueryData(await this._postRequest("query", cmd));
     }
 
-    async _getRequest(method, payload) {
-        const rsp = await axios.get(this.host + method, payload);
-        return rsp.data;
+    _getRequest(method, payload) {
+        return handleRequestErrors(axios.get(this.host + method, payload));
     }
 
-    async _postRequest(method, payload) {
-        const rsp = await axios.post(this.host + method, payload);
-        return rsp.data;
+    _postRequest(method, payload) {
+        return handleRequestErrors(axios.post(this.host + method, payload));
     }
+}
+
+// Handle errors
+
+function handleRequestErrors(response) {
+    return response
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            if (!error.response) {
+                throw new Error(error.message);
+            } else {
+                throw new Error(error.response.data.message);
+            }
+        });
 }
 
 // Args processing

@@ -2,12 +2,12 @@ const { Sliceup, count, bar, time } = require("./index.js");
 
 console.log("Welcome to SliceUp client!");
 
-const sliceup = new Sliceup("localhost");
+const sliceup = new Sliceup("demo.sliceup.co");
 
 sliceup
     .summary()
     .then(response => console.log(response))
-    .catch(error => console.log(error));
+    .catch(error => console.error(error));
 
 sliceup
     .create({
@@ -20,7 +20,7 @@ sliceup
         recreate: true
     })
     .then(response => console.log(response))
-    .catch(error => console.log(error));
+    .catch(error => console.error(error));
 
 sliceup
     .insert({
@@ -37,7 +37,7 @@ sliceup
         ]
     })
     .then(response => console.log(response))
-    .catch(error => console.log(error));
+    .catch(error => console.error(error));
 
 sliceup
     .query({
@@ -45,7 +45,7 @@ sliceup
         from: "orders"
     })
     .then(response => console.log(response))
-    .catch(error => console.log(error));
+    .catch(error => console.error(error));
 
 sliceup
     .query({
@@ -54,14 +54,14 @@ sliceup
         from: "orders"
     })
     .then(response => console.log(response))
-    .catch(error => console.log(error));
+    .catch(error => console.error(error));
 
 sliceup
     .delete("orders")
     .then(response => console.log(response))
-    .catch(error => console.log(error));
+    .catch(error => console.error(error));
 
 sliceup
     .summary()
     .then(response => console.log(response))
-    .catch(error => console.log(error));
+    .catch(error => console.error(error));
