@@ -1,12 +1,12 @@
-const {describe, it} = require('mocha');
+const { describe, it } = require("mocha");
 
-const assert = require('assert');
+const assert = require("assert");
 
-const { isBool, isInt, isFloat, isString } = require('../src/helpers.js');
+const { isBool, isInt, isFloat, isString } = require("../src/helpers.js");
 
-describe('Helpers', function() {
-    describe('#isBool()', function() {
-        it('should properly discover types', function() {
+describe("Helpers", () => {
+    describe("#isBool()", () => {
+        it("should properly discover types", () => {
             assert.equal(isBool(true), true);
             assert.equal(isBool(false), true);
 
@@ -20,8 +20,8 @@ describe('Helpers', function() {
         });
     });
 
-    describe('#isFloat()', function() {
-        it('should properly discover types', function() {
+    describe("#isFloat()", () => {
+        it("should properly discover types", () => {
             assert.equal(isFloat(1.2), true);
             assert.equal(isFloat(31231414123.3), true);
             assert.equal(isFloat(-31231414123.3), true);
@@ -35,8 +35,8 @@ describe('Helpers', function() {
         });
     });
 
-    describe('#isInt()', function() {
-        it('should properly discover types', function() {
+    describe("#isInt()", () => {
+        it("should properly discover types", () => {
             assert.equal(isInt(1.0), true);
             assert.equal(isInt(-1.0), true);
             assert.equal(isInt(2), true);
@@ -50,12 +50,11 @@ describe('Helpers', function() {
         });
     });
 
-    describe('#isString()', function() {
-        it('should properly discover types', function() {
+    describe("#isString()", () => {
+        it("should properly discover types", () => {
             assert.equal(isString(""), true);
             assert.equal(isString("string"), true);
             assert.equal(isString("1.0"), true);
-
 
             assert.equal(isString(1.0), false);
             assert.equal(isString(1.2), false);

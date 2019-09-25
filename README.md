@@ -151,6 +151,18 @@ sliceup.query({
 .catch(error => console.log(error));
 ```
 
+### Delete tables
+
+```js
+const s = require('sliceup');
+
+const sliceup = new s.Sliceup('demo.sliceup.co');
+
+sliceup.delete('orders')
+.then(response => console.log(response))
+.catch(error => console.log(error));
+```
+
 Docs
 ---
 

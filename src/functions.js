@@ -1,4 +1,4 @@
-const { isBool, isInt, isFloat, isString } = require('./helpers.js');
+const { isBool, isInt, isFloat, isString } = require("./helpers.js");
 
 ///// Unary functions
 
@@ -12,7 +12,7 @@ const { isBool, isInt, isFloat, isString } = require('./helpers.js');
  * @returns {object} {Id: string}
  */
 function id(name) {
-    return { 'Id': name }
+    return { Id: name };
 }
 
 /**
@@ -26,7 +26,7 @@ function id(name) {
  * @returns {object} {ColAlias: [{Id: string}, string]}
  */
 function alias(id, name) {
-    return { 'ColAlias': [toId(id), name] }
+    return { ColAlias: [toId(id), name] };
 }
 
 /**
@@ -39,7 +39,7 @@ function alias(id, name) {
  * @returns {object} {Avg: {Id: string}}
  */
 function avg(id) {
-    return { 'Avg': toId(id) }
+    return { Avg: toId(id) };
 }
 
 /**
@@ -52,7 +52,7 @@ function avg(id) {
  * @returns {object} {Bool: boolean}
  */
 function bool(arg) {
-    return { 'Bool': arg }
+    return { Bool: arg };
 }
 
 /**
@@ -65,7 +65,7 @@ function bool(arg) {
  * @returns {object} {Count: {Id: string}}
  */
 function count(id) {
-    return { 'Count': toId(id) }
+    return { Count: toId(id) };
 }
 
 /**
@@ -83,15 +83,17 @@ function count(id) {
  * @returns {object} {Datetime: string}
  */
 function datetime(y, mm, dd, h, m, s) {
-    h = typeof h !== 'undefined' ? h : 0;
-    m = typeof m !== 'undefined' ? m : 0;
-    s = typeof s !== 'undefined' ? s : 0;
+    h = typeof h !== "undefined" ? h : 0;
+    m = typeof m !== "undefined" ? m : 0;
+    s = typeof s !== "undefined" ? s : 0;
 
     const datetime =
         `${y}/${mm.toString().padStart(2, "0")}/${dd.toString().padStart(2, "0")}` +
-        `T${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+        `T${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}:${s
+            .toString()
+            .padStart(2, "0")}`;
 
-    return { 'Datetime': datetime}
+    return { Datetime: datetime };
 }
 
 /**
@@ -104,7 +106,7 @@ function datetime(y, mm, dd, h, m, s) {
  * @returns {object} {Dev: {Id: string}}
  */
 function dev(id) {
-    return { 'Dev': toId(id) }
+    return { Dev: toId(id) };
 }
 
 /**
@@ -117,7 +119,7 @@ function dev(id) {
  * @returns {object} {Float: number}
  */
 function float(arg) {
-    return { 'Float': arg }
+    return { Float: arg };
 }
 
 /**
@@ -130,7 +132,7 @@ function float(arg) {
  * @returns {object} {Int: number}
  */
 function int(arg) {
-    return { 'Int': arg }
+    return { Int: arg };
 }
 
 /**
@@ -143,7 +145,7 @@ function int(arg) {
  * @returns {object} {Last: {Id: string}}
  */
 function last(id) {
-    return { 'Last': toId(id) }
+    return { Last: toId(id) };
 }
 
 /**
@@ -156,7 +158,7 @@ function last(id) {
  * @returns {object} {Max: {Id: string}}
  */
 function max(id) {
-    return { 'Max': toId(id) }
+    return { Max: toId(id) };
 }
 
 /**
@@ -169,7 +171,7 @@ function max(id) {
  * @returns {object} {Min: {Id: string}}
  */
 function min(id) {
-    return { 'Min': toId(id) }
+    return { Min: toId(id) };
 }
 
 /**
@@ -182,7 +184,7 @@ function min(id) {
  * @returns {object} {Month: {Id: string}}
  */
 function month(id) {
-    return { 'Month': toId(id) }
+    return { Month: toId(id) };
 }
 
 /**
@@ -195,7 +197,7 @@ function month(id) {
  * @returns {object} {Str: string}
  */
 function str(arg) {
-    return { 'Str': arg }
+    return { Str: arg };
 }
 
 /**
@@ -208,7 +210,7 @@ function str(arg) {
  * @returns {object} {Sum: {Id: string}}
  */
 function sum(id) {
-    return { 'Sum': toId(id) }
+    return { Sum: toId(id) };
 }
 
 /**
@@ -221,7 +223,7 @@ function sum(id) {
  * @returns {object} {Sums: {Id: string}}
  */
 function sums(id) {
-    return { 'Sums': toId(id) }
+    return { Sums: toId(id) };
 }
 
 /**
@@ -236,9 +238,11 @@ function sums(id) {
  * @returns {object} {Time: string}
  */
 function time(h, m, s) {
-    const time = `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+    const time = `${h.toString().padStart(2, "0")}:${m
+        .toString()
+        .padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 
-    return {'Time': time}
+    return { Time: time };
 }
 
 /**
@@ -251,7 +255,7 @@ function time(h, m, s) {
  * @returns {object} {Unique: {Id: string}}
  */
 function unique(id) {
-    return { 'Unique': toId(id) }
+    return { Unique: toId(id) };
 }
 
 /**
@@ -264,7 +268,7 @@ function unique(id) {
  * @returns {object} {Var: {Id: string}}
  */
 function variance(id) {
-    return { 'Var': toId(id) }
+    return { Var: toId(id) };
 }
 
 /**
@@ -277,8 +281,7 @@ function variance(id) {
  * @returns {object} {Year: {Id: string}}
  */
 function year(id) {
-    return { 'Year': toId(id) }
-
+    return { Year: toId(id) };
 }
 
 ///// Binary functions
@@ -294,7 +297,7 @@ function year(id) {
  * @returns {object} {Add: [{Id: string}, object]}
  */
 function add(lhs, rhs) {
-    return { 'Add': [toId(lhs), toTypedExpresion(rhs)] }
+    return { Add: [toId(lhs), toTypedExpresion(rhs)] };
 }
 
 /**
@@ -308,7 +311,7 @@ function add(lhs, rhs) {
  * @returns {object} {Bar: [{Id: string}, object]}
  */
 function bar(lhs, rhs) {
-    return { 'Bar': [toId(lhs), toTypedExpresion(rhs)] }
+    return { Bar: [toId(lhs), toTypedExpresion(rhs)] };
 }
 
 /**
@@ -322,7 +325,7 @@ function bar(lhs, rhs) {
  * @returns {object} {Div: [{Id: string}, object]}
  */
 function div(lhs, rhs) {
-    return { 'Div': [toId(lhs), toTypedExpresion(rhs)] }
+    return { Div: [toId(lhs), toTypedExpresion(rhs)] };
 }
 
 /**
@@ -336,7 +339,7 @@ function div(lhs, rhs) {
  * @returns {object} {Ema: [{Id: string}, number]}
  */
 function ema(id, alpha) {
-    return { 'Ema': [toId(id), int(alpha)] }
+    return { Ema: [toId(id), int(alpha)] };
 }
 
 /**
@@ -350,7 +353,7 @@ function ema(id, alpha) {
  * @returns {object} {Eq: [{Id: string}, object]}
  */
 function eq(lhs, rhs) {
-    return { 'Eq': [toId(lhs), toTypedExpresion(rhs)] }
+    return { Eq: [toId(lhs), toTypedExpresion(rhs)] };
 }
 
 /**
@@ -364,7 +367,7 @@ function eq(lhs, rhs) {
  * @returns {object} {Gt: [{Id: string}, object]}
  */
 function gt(lhs, rhs) {
-    return { 'Gt': [toId(lhs), toTypedExpresion(rhs)] }
+    return { Gt: [toId(lhs), toTypedExpresion(rhs)] };
 }
 
 /**
@@ -378,7 +381,7 @@ function gt(lhs, rhs) {
  * @returns {object} {Gte: [{Id: string}, object]}
  */
 function gte(lhs, rhs) {
-    return { 'Gte': [toId(lhs), toTypedExpresion(rhs)] }
+    return { Gte: [toId(lhs), toTypedExpresion(rhs)] };
 }
 
 /**
@@ -392,7 +395,7 @@ function gte(lhs, rhs) {
  * @returns {object} {Lt: [{Id: string}, object]}
  */
 function lt(lhs, rhs) {
-    return { 'Lt': [toId(lhs), toTypedExpresion(rhs)] }
+    return { Lt: [toId(lhs), toTypedExpresion(rhs)] };
 }
 
 /**
@@ -406,7 +409,7 @@ function lt(lhs, rhs) {
  * @returns {object} {Lte: [{Id: string}, object]}
  */
 function lte(lhs, rhs) {
-    return { 'Lte': [toId(lhs), toTypedExpresion(rhs)] }
+    return { Lte: [toId(lhs), toTypedExpresion(rhs)] };
 }
 
 /**
@@ -420,7 +423,7 @@ function lte(lhs, rhs) {
  * @returns {object} {MAvg: [{Id: string}, number]}
  */
 function mavg(id, lookback) {
-    return { 'MAvg': [toId(id), int(lookback)] }
+    return { MAvg: [toId(id), int(lookback)] };
 }
 
 /**
@@ -434,7 +437,7 @@ function mavg(id, lookback) {
  * @returns {object} {MDev: [{Id: string}, number]}
  */
 function mdev(id, lookback) {
-    return { 'MDev': [toId(id), int(lookback)] }
+    return { MDev: [toId(id), int(lookback)] };
 }
 
 /**
@@ -448,7 +451,7 @@ function mdev(id, lookback) {
  * @returns {object} {Mul: [{Id: string}, object]}
  */
 function mul(lhs, rhs) {
-    return { 'Mul': [toId(lhs), toTypedExpresion(rhs)] }
+    return { Mul: [toId(lhs), toTypedExpresion(rhs)] };
 }
 
 /**
@@ -462,7 +465,7 @@ function mul(lhs, rhs) {
  * @returns {object} {Neq: [{Id: string}, object]}
  */
 function neq(lhs, rhs) {
-    return { 'Neq': [toId(lhs), toTypedExpresion(rhs)] }
+    return { Neq: [toId(lhs), toTypedExpresion(rhs)] };
 }
 
 /**
@@ -476,65 +479,65 @@ function neq(lhs, rhs) {
  * @returns {object} {Sub: [{Id: string}, object]}
  */
 function sub(lhs, rhs) {
-    return { 'Sub': [toId(lhs), toTypedExpresion(rhs)] }
+    return { Sub: [toId(lhs), toTypedExpresion(rhs)] };
 }
 
 // Helpers
 
 function toId(arg) {
     if (isString(arg)) {
-        arg = id(arg)
+        arg = id(arg);
     }
-    return arg
+    return arg;
 }
 
 function toTypedExpresion(arg) {
     if (isBool(arg)) {
-        return bool(arg)
+        return bool(arg);
     } else if (isInt(arg)) {
-        return int(arg)
+        return int(arg);
     } else if (isFloat(arg)) {
-        return float(arg)
+        return float(arg);
     } else if (isString(arg)) {
-        return str(arg)
+        return str(arg);
     }
 
-    return arg
+    return arg;
 }
 
 module.exports = {
-    id: id,
-    add: add,
-    alias: alias,
-    avg: avg,
-    bar: bar,
-    bool: bool,
-    count: count,
-    datetime: datetime,
-    dev: dev,
-    div: div,
-    ema: ema,
-    eq: eq,
-    float: float,
-    gt: gt,
-    gte: gte,
-    int: int,
-    last: last,
-    lt: lt,
-    lte: lte,
-    mavg: mavg,
-    max: max,
-    mdev: mdev,
-    min: min,
-    month: month,
-    mul: mul,
-    neq: neq,
-    str: str,
-    sub: sub,
-    sum: sum,
-    sums: sums,
-    time: time,
-    unique: unique,
-    variance: variance,
-    year: year
+    id,
+    add,
+    alias,
+    avg,
+    bar,
+    bool,
+    count,
+    datetime,
+    dev,
+    div,
+    ema,
+    eq,
+    float,
+    gt,
+    gte,
+    int,
+    last,
+    lt,
+    lte,
+    mavg,
+    max,
+    mdev,
+    min,
+    month,
+    mul,
+    neq,
+    str,
+    sub,
+    sum,
+    sums,
+    time,
+    unique,
+    variance,
+    year
 };

@@ -1,18 +1,64 @@
 {
+    "extends": [
+        "eslint:recommended"
+    ],
+    "plugins": [
+        "prettier"
+    ],
     "env": {
         "browser": true,
         "commonjs": true,
         "es6": true
     },
-    "extends": "eslint:recommended",
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
     "parserOptions": {
         "ecmaVersion": 2018
     },
     "rules": {
-        "no-prototype-builtins": "off"
+        "semi": ["error", "always"],
+        "comma-dangle": ["error", "only-multiline"],
+        "curly": "error",
+        "no-console": "off",
+        "no-debugger": "warn",
+        "no-unused-vars": "warn",
+        "require-yield": "warn",
+        "prettier/prettier": "warn",
+        "no-useless-return": "warn",
+        "no-return-await": "warn",
+        "no-with": "error",
+        "require-await": "warn",
+        "yoda": "error",
+        "no-new": "error",
+        "no-loop-func": "error",
+        "no-multi-spaces": "warn",
+        "array-callback-return": "error",
+        "complexity": "error",
+        "dot-notation": "error",
+        "eqeqeq": "error",
+        "no-alert": "warn",
+        "no-else-return": "warn",
+        "prefer-rest-params": "error",
+        "prefer-template": "warn",
+        "prefer-spread": "warn",
+        "prefer-destructuring": "warn",
+        "prefer-const": "warn",
+        "prefer-arrow-callback": "warn",
+        "no-var": "error",
+        "no-duplicate-imports": "warn",
+        "no-useless-rename": "warn",
+        "object-shorthand": "warn",
+        "arrow-spacing": "warn",
+        "no-implicit-coercion": "error",
+        "no-self-compare": "error",
+        "no-sequences": "warn",
+        "no-unused-expressions": "warn",
+        "no-undef-init": "error"
+    },
+    "globals": {
+        "console": false,
+        "process": false,
+        "IS_PRODUCTION": false,
+        "IS_DEVELOPMENT": false,
+        "check": true,
+        "gen": true
     }
 }

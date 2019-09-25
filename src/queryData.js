@@ -3,33 +3,32 @@ const { ValueViewerSymbol } = require("@runkit/value-viewer");
 const cssURL = "https://sliceup.sfo2.digitaloceanspaces.com/dataTable.css";
 
 function produceTableHtml(headers, data, duration) {
-    let html = '<link rel="stylesheet" href="' + cssURL +'">';
+    let html = `<link rel="stylesheet" href="${cssURL}">`;
     html += '<div class="data_table"><table><thead><tr>';
 
-    headers.forEach(function(header) {
-        html += '<th>' + header + '</th>'
+    headers.forEach(header => {
+        html += `<th>${header}</th>`;
     });
 
-    html += '</tr></thead><tbody>';
+    html += "</tr></thead><tbody>";
 
-    data.forEach(function(row) {
-        html += '<tr>';
-        row.forEach(function(column) {
-            html += '<td>' + column + '</td>';
+    data.forEach(row => {
+        html += "<tr>";
+        row.forEach(column => {
+            html += `<td>${column}</td>`;
         });
-        html += '</tr>';
+        html += "</tr>";
     });
 
-    html += '</tbody><tfoot><tr>';
-    html += '<td colspan="' + headers.length + '">Duration: ' + duration + '</td>';
-    html += '</tr></tfoot></table></div>';
+    html += "</tbody><tfoot><tr>";
+    html += `<td colspan="${headers.length}">Duration: ${duration}</td>`;
+    html += "</tr></tfoot></table></div>";
 
     return html;
 }
 
 /** @class Represents data returned by database queries. */
-class QueryData
-{
+class QueryData {
     /**
      * Creates QueryData object.
      *
@@ -46,14 +45,13 @@ class QueryData
      *
      * @returns {object} {[ValueViewerSymbol]: object}
      */
-    visualize()
-    {
+    visualize() {
         const title = "QueryData";
         const html = produceTableHtml(this.headers, this.data, this.duration);
 
         return {
             [ValueViewerSymbol]: {
-                title: title,
+                title,
                 HTML: html
             }
         };
@@ -61,5 +59,5 @@ class QueryData
 }
 
 module.exports = {
-    QueryData: QueryData
+    QueryData
 };

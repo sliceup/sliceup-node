@@ -1,9 +1,8 @@
-const axios = require('axios');
-const { QueryData } = require('./queryData.js');
+const axios = require("axios");
+const { QueryData } = require("./queryData.js");
 
 /** @class Represents SliceUp client. */
 class Sliceup {
-
     /**
      * Creates a Sliceup client.
      *
@@ -11,8 +10,8 @@ class Sliceup {
      * @param {string} [port='8080'] Connection port.
      */
     constructor(ip, port) {
-        port = typeof port !== 'undefined' ? port : '8080';
-        this.host = 'http://' + ip + ':' + port + '/';
+        port = typeof port !== "undefined" ? port : "8080";
+        this.host = `http://${ip}:${port}/`;
     }
 
     /**
@@ -23,8 +22,8 @@ class Sliceup {
      * @param {object} config New table configuration.
      * @returns {Promise<object>}
      */
-    async create(config) {
-        return await this._postRequest('create', config);
+    create(config) {
+        return this._postRequest("create", config);
     }
 
     /**
@@ -34,8 +33,8 @@ class Sliceup {
      *
      * @returns {Promise<object>}
      */
-    async summary() {
-        return await this._getRequest('summary');
+    summary() {
+        return this._getRequest("summary");
     }
 
     /**
@@ -46,29 +45,29 @@ class Sliceup {
      * @param {object} data New row data.
      * @returns {Promise<object>}
      */
-    async insert(data) {
-        return await this._postRequest('insert', data);
+    insert(data) {
+        return this._postRequest("insert", data);
     }
 
     /**
-     * Inserts the data.
+     * Deletes the tables.
      *
-     * Inserts the given data into the database.
+     * Deletes the tables of given names.
      *
-     * @param {object} data New row data.
+     * @param {Array|string} cmd Tables names.
      * @returns {Promise<object>}
      */
-    async delete(cmd) {
+    delete(cmd) {
         cmd = processDeleteArgs(cmd);
-        return await this._postRequest('delete', cmd);
+        return this._postRequest("delete", cmd);
     }
 
     /**
      * @param {string} name
      * @returns {Promise<object>}
      */
-    async describe(name) {
-        return await this._postRequest('describe', { name: name });
+    describe(name) {
+        return this._postRequest("describe", { name });
     }
 
     /**
@@ -81,7 +80,7 @@ class Sliceup {
      */
     async query(cmd) {
         cmd = processQueryArgs(cmd);
-        return new QueryData(await this._postRequest('query', cmd));
+        return new QueryData(await this._postRequest("query", cmd));
     }
 
     async _getRequest(method, payload) {
@@ -98,19 +97,19 @@ class Sliceup {
 // Args processing
 
 function processQueryArgs(cmd) {
-    const columnArgs = ['select', 'where', 'by'];
-    for (let key of columnArgs) {
+    const columnArgs = ["select", "where", "by"];
+    for (const key of columnArgs) {
+        // eslint-disable-next-line no-prototype-builtins
         if (cmd.hasOwnProperty(key)) {
             cmd[key] = toArgsArray(cmd[key]);
             for (let i = 0; i < cmd[key].length; i++) {
-                if (typeof cmd[key][i] === 'string') {
-                    cmd[key][i] = toId(cmd[key][i]);
-                }
+                cmd[key][i] = toId(cmd[key][i]);
             }
         }
     }
 
-    const fromKey = 'from';
+    const fromKey = "from";
+    // eslint-disable-next-line no-prototype-builtins
     if (cmd.hasOwnProperty(fromKey)) {
         cmd[fromKey] = toTable(cmd[fromKey]);
     }
@@ -123,26 +122,26 @@ function processDeleteArgs(cmd) {
 }
 
 function toArgsArray(cmd) {
-    if(!Array.isArray(cmd)) {
+    if (!Array.isArray(cmd)) {
         cmd = [cmd];
     }
     return cmd;
 }
 
 function toTable(name) {
-    if (typeof name === 'string') {
-        name = {'Table': name};
+    if (typeof name === "string") {
+        name = { Table: name };
     }
-    return name
+    return name;
 }
 
 function toId(name) {
-    if (typeof name === 'string') {
-        name = {'Id': name};
+    if (typeof name === "string") {
+        name = { Id: name };
     }
-    return name
+    return name;
 }
 
 module.exports = {
-    Sliceup: Sliceup
+    Sliceup
 };
