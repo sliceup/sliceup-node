@@ -2,7 +2,7 @@ const { Sliceup, count, bar, time } = require("./index.js");
 
 console.log("Welcome to SliceUp client!");
 
-const sliceup = new Sliceup("demo.sliceup.co");
+const sliceup = Sliceup("demo.sliceup.co");
 
 sliceup
     .summary()

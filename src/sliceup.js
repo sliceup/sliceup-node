@@ -87,17 +87,17 @@ const Sliceup = (ip, port) => {
 
 // Make requests
 
-function getRequest(host, method, payload) {
+const getRequest = (host, method, payload) => {
     return handleRequestErrors(axios.get(host + method, payload));
-}
+};
 
-function postRequest(host, method, payload) {
+const postRequest = (host, method, payload) => {
     return handleRequestErrors(axios.post(host + method, payload));
-}
+};
 
 // Handle errors
 
-function handleRequestErrors(response) {
+const handleRequestErrors = (response) => {
     return response
         .then(response => {
             return response.data;
@@ -109,11 +109,11 @@ function handleRequestErrors(response) {
                 throw new Error(error.response.data.message);
             }
         });
-}
+};
 
 // Args processing
 
-function processQueryArgs(cmd) {
+const  processQueryArgs = (cmd) => {
     const columnArgs = ["select", "where", "by"];
     for (const key of columnArgs) {
         // eslint-disable-next-line no-prototype-builtins
@@ -132,32 +132,30 @@ function processQueryArgs(cmd) {
     }
 
     return cmd;
-}
+};
 
-function processDeleteArgs(cmd) {
-    return toArgsArray(cmd);
-}
+const processDeleteArgs = (cmd) => toArgsArray(cmd);
 
-function toArgsArray(cmd) {
+const toArgsArray = (cmd) => {
     if (!Array.isArray(cmd)) {
         cmd = [cmd];
     }
     return cmd;
-}
+};
 
-function toTable(name) {
+const toTable = (name) => {
     if (typeof name === "string") {
         name = { Table: name };
     }
     return name;
-}
+};
 
-function toId(name) {
+const toId = (name) => {
     if (typeof name === "string") {
         name = { Id: name };
     }
     return name;
-}
+};
 
 module.exports = {
     Sliceup
