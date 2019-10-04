@@ -8,12 +8,10 @@ const { QueryData } = require("./queryData.js");
  * @param {string} [port='8080'] Connection port.
  */
 const Sliceup = (ip, port) => {
-
-    port =  typeof port !== "undefined" ? port : "8080";
+    port = typeof port !== "undefined" ? port : "8080";
     const host = `http://${ip}:${port}/`;
 
     const instance = {
-
         /**
          * Creates the table.
          *
@@ -23,7 +21,7 @@ const Sliceup = (ip, port) => {
          * @returns {Promise<object>}
          */
 
-        create: (config) => postRequest(host, "create", config),
+        create: config => postRequest(host, "create", config),
 
         /**
          * Summarizes the database.
@@ -32,7 +30,7 @@ const Sliceup = (ip, port) => {
          *
          * @returns {Promise<object>}
          */
-        summary: () => getRequest(host,"summary"),
+        summary: () => getRequest(host, "summary"),
 
         /**
          * Inserts the data.
@@ -42,7 +40,7 @@ const Sliceup = (ip, port) => {
          * @param {object} data New row data.
          * @returns {Promise<object>}
          */
-        insert: (data) => postRequest(host,"insert", data),
+        insert: data => postRequest(host, "insert", data),
 
         /**
          * Deletes the tables.
@@ -52,17 +50,17 @@ const Sliceup = (ip, port) => {
          * @param {Array|string} cmd Tables names.
          * @returns {Promise<object>}
          */
-        delete: (cmd) => {
+        delete: cmd => {
             cmd = processDeleteArgs(cmd);
-            return postRequest(host,"delete", cmd);
+            return postRequest(host, "delete", cmd);
         },
 
         /**
          * @param {string} name
          * @returns {Promise<object>}
          */
-        describe: (name) => {
-            return postRequest(host,"describe", {name});
+        describe: name => {
+            return postRequest(host, "describe", { name });
         },
 
         /**
@@ -73,9 +71,9 @@ const Sliceup = (ip, port) => {
          * @param {object} cmd Query parameters.
          * @returns {Promise<QueryData>}
          */
-        query: async (cmd) => {
+        query: async cmd => {
             cmd = processQueryArgs(cmd);
-            return QueryData(await postRequest(host,"query", cmd));
+            return QueryData(await postRequest(host, "query", cmd));
         }
     };
 
@@ -97,7 +95,7 @@ const postRequest = (host, method, payload) => {
 
 // Handle errors
 
-const handleRequestErrors = (response) => {
+const handleRequestErrors = response => {
     return response
         .then(response => {
             return response.data;
@@ -113,11 +111,10 @@ const handleRequestErrors = (response) => {
 
 // Args processing
 
-const  processQueryArgs = (cmd) => {
+const processQueryArgs = cmd => {
     const columnArgs = ["select", "where", "by"];
     for (const key of columnArgs) {
-        // eslint-disable-next-line no-prototype-builtins
-        if (cmd.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(cmd, key)) {
             cmd[key] = toArgsArray(cmd[key]);
             for (let i = 0; i < cmd[key].length; i++) {
                 cmd[key][i] = toId(cmd[key][i]);
@@ -126,31 +123,30 @@ const  processQueryArgs = (cmd) => {
     }
 
     const fromKey = "from";
-    // eslint-disable-next-line no-prototype-builtins
-    if (cmd.hasOwnProperty(fromKey)) {
+    if (Object.prototype.hasOwnProperty.call(cmd, fromKey)) {
         cmd[fromKey] = toTable(cmd[fromKey]);
     }
 
     return cmd;
 };
 
-const processDeleteArgs = (cmd) => toArgsArray(cmd);
+const processDeleteArgs = cmd => toArgsArray(cmd);
 
-const toArgsArray = (cmd) => {
+const toArgsArray = cmd => {
     if (!Array.isArray(cmd)) {
         cmd = [cmd];
     }
     return cmd;
 };
 
-const toTable = (name) => {
+const toTable = name => {
     if (typeof name === "string") {
         name = { Table: name };
     }
     return name;
 };
 
-const toId = (name) => {
+const toId = name => {
     if (typeof name === "string") {
         name = { Id: name };
     }

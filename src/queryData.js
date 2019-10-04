@@ -6,26 +6,26 @@ const cssURL = "https://sliceup.sfo2.digitaloceanspaces.com/dataTable.css";
  *
  * @param {object} result Query result.
  */
-const QueryData = async (result) => {
-    const data = result.data;
-    const headers = result.headers;
-    const duration = result.duration;
+const QueryData = result => {
+    const { data } = result;
+    const { headers } = result;
+    const { duration } = result;
 
     return {
         /**
          * Query result data
          */
-        data: data,
+        data,
 
         /**
          * Query headers
          */
-        headers: headers,
+        headers,
 
         /**
          * Query duration
          */
-        duration: duration,
+        duration,
 
         /**
          * Creates RunKit's ValueViewer object.
@@ -43,7 +43,7 @@ const QueryData = async (result) => {
                 }
             };
         }
-    }
+    };
 };
 
 function produceTableHtml(headers, data, duration) {
