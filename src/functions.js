@@ -88,7 +88,7 @@ function datetime(y, mm, dd, h, m, s) {
     s = typeof s !== "undefined" ? s : 0;
 
     const datetime =
-        `${y}/${mm.toString().padStart(2, "0")}/${dd.toString().padStart(2, "0")}` +
+        `${y}-${mm.toString().padStart(2, "0")}-${dd.toString().padStart(2, "0")}` +
         `T${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}:${s
             .toString()
             .padStart(2, "0")}`;
