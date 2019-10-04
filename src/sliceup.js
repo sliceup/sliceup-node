@@ -1,98 +1,98 @@
 const axios = require("axios");
 const { QueryData } = require("./queryData.js");
 
-/** @class Represents SliceUp client. */
-class Sliceup {
-    /**
-     * Creates a Sliceup client.
-     *
-     * @param {string} ip            Connection ip address.
-     * @param {string} [port='8080'] Connection port.
-     */
-    constructor(ip, port) {
-        port = typeof port !== "undefined" ? port : "8080";
-        this.host = `http://${ip}:${port}/`;
+/**
+ * Creates a Sliceup client object.
+ *
+ * @param {string} ip            Connection ip address.
+ * @param {string} [port='8080'] Connection port.
+ */
+const Sliceup = (ip, port) => {
 
-        // Host health check
-        this.summary().catch(error => console.error(error));
-    }
+    port =  typeof port !== "undefined" ? port : "8080";
+    const host = `http://${ip}:${port}/`;
 
-    /**
-     * Creates the table.
-     *
-     * Creates the table with the given parameters in the database.
-     *
-     * @param {object} config New table configuration.
-     * @returns {Promise<object>}
-     */
-    create(config) {
-        return this._postRequest("create", config);
-    }
+    const instance = {
 
-    /**
-     * Summarizes the database.
-     *
-     * Summarizes the database configuration.
-     *
-     * @returns {Promise<object>}
-     */
-    summary() {
-        return this._getRequest("summary");
-    }
+        /**
+         * Creates the table.
+         *
+         * Creates the table with the given parameters in the database.
+         *
+         * @param {object} config New table configuration.
+         * @returns {Promise<object>}
+         */
 
-    /**
-     * Inserts the data.
-     *
-     * Inserts the given data into the database.
-     *
-     * @param {object} data New row data.
-     * @returns {Promise<object>}
-     */
-    insert(data) {
-        return this._postRequest("insert", data);
-    }
+        create: (config) => postRequest(host, "create", config),
 
-    /**
-     * Deletes the tables.
-     *
-     * Deletes the tables of given names.
-     *
-     * @param {Array|string} cmd Tables names.
-     * @returns {Promise<object>}
-     */
-    delete(cmd) {
-        cmd = processDeleteArgs(cmd);
-        return this._postRequest("delete", cmd);
-    }
+        /**
+         * Summarizes the database.
+         *
+         * Summarizes the database configuration.
+         *
+         * @returns {Promise<object>}
+         */
+        summary: () => getRequest(host,"summary"),
 
-    /**
-     * @param {string} name
-     * @returns {Promise<object>}
-     */
-    describe(name) {
-        return this._postRequest("describe", { name });
-    }
+        /**
+         * Inserts the data.
+         *
+         * Inserts the given data into the database.
+         *
+         * @param {object} data New row data.
+         * @returns {Promise<object>}
+         */
+        insert: (data) => postRequest(host,"insert", data),
 
-    /**
-     * Queries the data.
-     *
-     * Queries the database using the given parameters.
-     *
-     * @param {object} cmd Query parameters.
-     * @returns {Promise<QueryData>}
-     */
-    async query(cmd) {
-        cmd = processQueryArgs(cmd);
-        return new QueryData(await this._postRequest("query", cmd));
-    }
+        /**
+         * Deletes the tables.
+         *
+         * Deletes the tables of given names.
+         *
+         * @param {Array|string} cmd Tables names.
+         * @returns {Promise<object>}
+         */
+        delete: (cmd) => {
+            cmd = processDeleteArgs(cmd);
+            return postRequest(host,"delete", cmd);
+        },
 
-    _getRequest(method, payload) {
-        return handleRequestErrors(axios.get(this.host + method, payload));
-    }
+        /**
+         * @param {string} name
+         * @returns {Promise<object>}
+         */
+        describe: (name) => {
+            return postRequest(host,"describe", {name});
+        },
 
-    _postRequest(method, payload) {
-        return handleRequestErrors(axios.post(this.host + method, payload));
-    }
+        /**
+         * Queries the data.
+         *
+         * Queries the database using the given parameters.
+         *
+         * @param {object} cmd Query parameters.
+         * @returns {Promise<QueryData>}
+         */
+        query: async (cmd) => {
+            cmd = processQueryArgs(cmd);
+            return QueryData(await postRequest(host,"query", cmd));
+        }
+    };
+
+    // Host health check
+    instance.summary().catch(error => console.error(error));
+
+    return instance;
+};
+
+// Make requests
+
+function getRequest(host, method, payload) {
+    return handleRequestErrors(axios.get(host + method, payload));
+}
+
+function postRequest(host, method, payload) {
+    return handleRequestErrors(axios.post(host + method, payload));
 }
 
 // Handle errors
