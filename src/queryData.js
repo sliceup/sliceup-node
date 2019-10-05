@@ -46,7 +46,7 @@ const QueryData = result => {
     };
 };
 
-function produceTableHtml(headers, data, duration) {
+const produceTableHtml = (headers, data, duration) => {
     let html = `<link rel="stylesheet" href="${cssURL}">`;
     html += '<div class="data_table"><table><thead><tr>';
 
@@ -69,7 +69,7 @@ function produceTableHtml(headers, data, duration) {
     html += "</tr></tfoot></table></div>";
 
     return html;
-}
+};
 
 module.exports = {
     QueryData

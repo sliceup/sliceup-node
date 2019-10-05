@@ -11,9 +11,7 @@ const { isBool, isInt, isFloat, isString } = require("./helpers.js");
  *
  * @returns {object} {Id: string}
  */
-function id(name) {
-    return { Id: name };
-}
+const id = name => ({ Id: name });
 
 /**
  * Aliases a column.
@@ -25,9 +23,7 @@ function id(name) {
  *
  * @returns {object} {ColAlias: [{Id: string}, string]}
  */
-function alias(id, name) {
-    return { ColAlias: [toId(id), name] };
-}
+const alias = (id, name) => ({ ColAlias: [toId(id), name] });
 
 /**
  * Calculates the arithmetic mean.
@@ -38,9 +34,7 @@ function alias(id, name) {
  *
  * @returns {object} {Avg: {Id: string}}
  */
-function avg(id) {
-    return { Avg: toId(id) };
-}
+const avg = id => ({ Avg: toId(id) });
 
 /**
  * Describes boolean value.
@@ -51,9 +45,7 @@ function avg(id) {
  *
  * @returns {object} {Bool: boolean}
  */
-function bool(arg) {
-    return { Bool: arg };
-}
+const bool = arg => ({ Bool: arg });
 
 /**
  * Counts the rows.
@@ -64,9 +56,7 @@ function bool(arg) {
  *
  * @returns {object} {Count: {Id: string}}
  */
-function count(id) {
-    return { Count: toId(id) };
-}
+const count = id => ({ Count: toId(id) });
 
 /**
  * Describes datetime value.
@@ -82,7 +72,7 @@ function count(id) {
  *
  * @returns {object} {Datetime: string}
  */
-function datetime(y, mm, dd, h, m, s) {
+const datetime = (y, mm, dd, h, m, s) => {
     h = typeof h !== "undefined" ? h : 0;
     m = typeof m !== "undefined" ? m : 0;
     s = typeof s !== "undefined" ? s : 0;
@@ -94,7 +84,7 @@ function datetime(y, mm, dd, h, m, s) {
             .padStart(2, "0")}`;
 
     return { Datetime: datetime };
-}
+};
 
 /**
  * Calculates the standard deviation.
@@ -105,9 +95,7 @@ function datetime(y, mm, dd, h, m, s) {
  *
  * @returns {object} {Dev: {Id: string}}
  */
-function dev(id) {
-    return { Dev: toId(id) };
-}
+const dev = id => ({ Dev: toId(id) });
 
 /**
  * Describes float value.
@@ -118,9 +106,7 @@ function dev(id) {
  *
  * @returns {object} {Float: number}
  */
-function float(arg) {
-    return { Float: arg };
-}
+const float = arg => ({ Float: arg });
 
 /**
  * Describes integer value.
@@ -131,9 +117,7 @@ function float(arg) {
  *
  * @returns {object} {Int: number}
  */
-function int(arg) {
-    return { Int: arg };
-}
+const int = arg => ({ Int: arg });
 
 /**
  * Selects the last row.
@@ -144,9 +128,7 @@ function int(arg) {
  *
  * @returns {object} {Last: {Id: string}}
  */
-function last(id) {
-    return { Last: toId(id) };
-}
+const last = id => ({ Last: toId(id) });
 
 /**
  * Finds the maximum.
@@ -157,9 +139,7 @@ function last(id) {
  *
  * @returns {object} {Max: {Id: string}}
  */
-function max(id) {
-    return { Max: toId(id) };
-}
+const max = id => ({ Max: toId(id) });
 
 /**
  * Finds the minimum.
@@ -170,9 +150,7 @@ function max(id) {
  *
  * @returns {object} {Min: {Id: string}}
  */
-function min(id) {
-    return { Min: toId(id) };
-}
+const min = id => ({ Min: toId(id) });
 
 /**
  * Gets the month.
@@ -183,9 +161,7 @@ function min(id) {
  *
  * @returns {object} {Month: {Id: string}}
  */
-function month(id) {
-    return { Month: toId(id) };
-}
+const month = id => ({ Month: toId(id) });
 
 /**
  * Describes string value.
@@ -196,9 +172,7 @@ function month(id) {
  *
  * @returns {object} {Str: string}
  */
-function str(arg) {
-    return { Str: arg };
-}
+const str = arg => ({ Str: arg });
 
 /**
  * Calculates the sum.
@@ -209,9 +183,7 @@ function str(arg) {
  *
  * @returns {object} {Sum: {Id: string}}
  */
-function sum(id) {
-    return { Sum: toId(id) };
-}
+const sum = id => ({ Sum: toId(id) });
 
 /**
  * Calculates the rolling cumulative sum.
@@ -222,9 +194,7 @@ function sum(id) {
  *
  * @returns {object} {Sums: {Id: string}}
  */
-function sums(id) {
-    return { Sums: toId(id) };
-}
+const sums = id => ({ Sums: toId(id) });
 
 /**
  * Describes time value.
@@ -237,13 +207,13 @@ function sums(id) {
  *
  * @returns {object} {Time: string}
  */
-function time(h, m, s) {
+const time = (h, m, s) => {
     const time = `${h.toString().padStart(2, "0")}:${m
         .toString()
         .padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 
     return { Time: time };
-}
+};
 
 /**
  * Finds all unique values.
@@ -254,9 +224,7 @@ function time(h, m, s) {
  *
  * @returns {object} {Unique: {Id: string}}
  */
-function unique(id) {
-    return { Unique: toId(id) };
-}
+const unique = id => ({ Unique: toId(id) });
 
 /**
  * Calculates the variance.
@@ -267,9 +235,7 @@ function unique(id) {
  *
  * @returns {object} {Var: {Id: string}}
  */
-function variance(id) {
-    return { Var: toId(id) };
-}
+const variance = id => ({ Var: toId(id) });
 
 /**
  * Gets the year.
@@ -280,9 +246,7 @@ function variance(id) {
  *
  * @returns {object} {Year: {Id: string}}
  */
-function year(id) {
-    return { Year: toId(id) };
-}
+const year = id => ({ Year: toId(id) });
 
 ///// Binary functions
 
@@ -296,9 +260,7 @@ function year(id) {
  *
  * @returns {object} {Add: [{Id: string}, object]}
  */
-function add(lhs, rhs) {
-    return { Add: [toId(lhs), toTypedExpresion(rhs)] };
-}
+const add = (lhs, rhs) => ({ Add: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Calculates bar values.
@@ -310,9 +272,7 @@ function add(lhs, rhs) {
  *
  * @returns {object} {Bar: [{Id: string}, object]}
  */
-function bar(lhs, rhs) {
-    return { Bar: [toId(lhs), toTypedExpresion(rhs)] };
-}
+const bar = (lhs, rhs) => ({ Bar: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Performs vectorized division.
@@ -324,9 +284,7 @@ function bar(lhs, rhs) {
  *
  * @returns {object} {Div: [{Id: string}, object]}
  */
-function div(lhs, rhs) {
-    return { Div: [toId(lhs), toTypedExpresion(rhs)] };
-}
+const div = (lhs, rhs) => ({ Div: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Calculates the exponential moving average.
@@ -338,9 +296,7 @@ function div(lhs, rhs) {
  *
  * @returns {object} {Ema: [{Id: string}, number]}
  */
-function ema(id, alpha) {
-    return { Ema: [toId(id), int(alpha)] };
-}
+const ema = (id, alpha) => ({ Ema: [toId(id), int(alpha)] });
 
 /**
  * Filters equal values.
@@ -352,9 +308,7 @@ function ema(id, alpha) {
  *
  * @returns {object} {Eq: [{Id: string}, object]}
  */
-function eq(lhs, rhs) {
-    return { Eq: [toId(lhs), toTypedExpresion(rhs)] };
-}
+const eq = (lhs, rhs) => ({ Eq: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Filters greater values.
@@ -366,9 +320,7 @@ function eq(lhs, rhs) {
  *
  * @returns {object} {Gt: [{Id: string}, object]}
  */
-function gt(lhs, rhs) {
-    return { Gt: [toId(lhs), toTypedExpresion(rhs)] };
-}
+const gt = (lhs, rhs) => ({ Gt: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Filters greater or equal values.
@@ -380,9 +332,7 @@ function gt(lhs, rhs) {
  *
  * @returns {object} {Gte: [{Id: string}, object]}
  */
-function gte(lhs, rhs) {
-    return { Gte: [toId(lhs), toTypedExpresion(rhs)] };
-}
+const gte = (lhs, rhs) => ({ Gte: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Filters lesser values.
@@ -394,9 +344,7 @@ function gte(lhs, rhs) {
  *
  * @returns {object} {Lt: [{Id: string}, object]}
  */
-function lt(lhs, rhs) {
-    return { Lt: [toId(lhs), toTypedExpresion(rhs)] };
-}
+const lt = (lhs, rhs) => ({ Lt: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Filters lesser or equal values.
@@ -408,9 +356,7 @@ function lt(lhs, rhs) {
  *
  * @returns {object} {Lte: [{Id: string}, object]}
  */
-function lte(lhs, rhs) {
-    return { Lte: [toId(lhs), toTypedExpresion(rhs)] };
-}
+const lte = (lhs, rhs) => ({ Lte: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Calculates the moving average.
@@ -422,9 +368,7 @@ function lte(lhs, rhs) {
  *
  * @returns {object} {MAvg: [{Id: string}, number]}
  */
-function mavg(id, lookback) {
-    return { MAvg: [toId(id), int(lookback)] };
-}
+const mavg = (id, lookback) => ({ MAvg: [toId(id), int(lookback)] });
 
 /**
  * Calculates the moving standard deviation.
@@ -436,9 +380,7 @@ function mavg(id, lookback) {
  *
  * @returns {object} {MDev: [{Id: string}, number]}
  */
-function mdev(id, lookback) {
-    return { MDev: [toId(id), int(lookback)] };
-}
+const mdev = (id, lookback) => ({ MDev: [toId(id), int(lookback)] });
 
 /**
  * Performs vectorized multiplication.
@@ -450,9 +392,7 @@ function mdev(id, lookback) {
  *
  * @returns {object} {Mul: [{Id: string}, object]}
  */
-function mul(lhs, rhs) {
-    return { Mul: [toId(lhs), toTypedExpresion(rhs)] };
-}
+const mul = (lhs, rhs) => ({ Mul: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Filters not equal values.
@@ -464,9 +404,7 @@ function mul(lhs, rhs) {
  *
  * @returns {object} {Neq: [{Id: string}, object]}
  */
-function neq(lhs, rhs) {
-    return { Neq: [toId(lhs), toTypedExpresion(rhs)] };
-}
+const neq = (lhs, rhs) => ({ Neq: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Performs vectorized subtraction.
@@ -478,20 +416,18 @@ function neq(lhs, rhs) {
  *
  * @returns {object} {Sub: [{Id: string}, object]}
  */
-function sub(lhs, rhs) {
-    return { Sub: [toId(lhs), toTypedExpresion(rhs)] };
-}
+const sub = (lhs, rhs) => ({ Sub: [toId(lhs), toTypedExpresion(rhs)] });
 
 // Helpers
 
-function toId(arg) {
+const toId = arg => {
     if (isString(arg)) {
         arg = id(arg);
     }
     return arg;
-}
+};
 
-function toTypedExpresion(arg) {
+const toTypedExpresion = arg => {
     if (isBool(arg)) {
         return bool(arg);
     } else if (isInt(arg)) {
@@ -503,7 +439,7 @@ function toTypedExpresion(arg) {
     }
 
     return arg;
-}
+};
 
 module.exports = {
     id,

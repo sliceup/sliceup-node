@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { QueryData } = require("./queryData.js");
+const { processDeleteArgs, processQueryArgs } = require("./helpers");
 
 /**
  * Creates a Sliceup client object.
@@ -107,50 +108,6 @@ const handleRequestErrors = response => {
                 throw new Error(error.response.data.message);
             }
         });
-};
-
-// Args processing
-
-const processQueryArgs = cmd => {
-    const columnArgs = ["select", "where", "by"];
-    for (const key of columnArgs) {
-        if (Object.prototype.hasOwnProperty.call(cmd, key)) {
-            cmd[key] = toArgsArray(cmd[key]);
-            for (let i = 0; i < cmd[key].length; i++) {
-                cmd[key][i] = toId(cmd[key][i]);
-            }
-        }
-    }
-
-    const fromKey = "from";
-    if (Object.prototype.hasOwnProperty.call(cmd, fromKey)) {
-        cmd[fromKey] = toTable(cmd[fromKey]);
-    }
-
-    return cmd;
-};
-
-const processDeleteArgs = cmd => toArgsArray(cmd);
-
-const toArgsArray = cmd => {
-    if (!Array.isArray(cmd)) {
-        cmd = [cmd];
-    }
-    return cmd;
-};
-
-const toTable = name => {
-    if (typeof name === "string") {
-        name = { Table: name };
-    }
-    return name;
-};
-
-const toId = name => {
-    if (typeof name === "string") {
-        name = { Id: name };
-    }
-    return name;
 };
 
 module.exports = {
