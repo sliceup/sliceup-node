@@ -1,4 +1,4 @@
-const { isBool, isInt, isFloat, isString } = require("./helpers.js");
+const { isBool, isInt, isFloat, isString } = require("./validators.js");
 
 ///// Unary functions
 
@@ -72,7 +72,7 @@ const count = id => ({ Count: toId(id) });
  *
  * @returns {object} {Datetime: string}
  */
-const datetime = (y, mm, dd, h, m, s) => {
+const datetime = ([y, mm, dd, h, m, s]) => {
     h = typeof h !== "undefined" ? h : 0;
     m = typeof m !== "undefined" ? m : 0;
     s = typeof s !== "undefined" ? s : 0;
@@ -207,7 +207,7 @@ const sums = id => ({ Sums: toId(id) });
  *
  * @returns {object} {Time: string}
  */
-const time = (h, m, s) => {
+const time = ([h, m, s]) => {
     const time = `${h.toString().padStart(2, "0")}:${m
         .toString()
         .padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
@@ -260,7 +260,7 @@ const year = id => ({ Year: toId(id) });
  *
  * @returns {object} {Add: [{Id: string}, object]}
  */
-const add = (lhs, rhs) => ({ Add: [toId(lhs), toTypedExpresion(rhs)] });
+const add = ([lhs, rhs]) => ({ Add: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Calculates bar values.
@@ -272,7 +272,7 @@ const add = (lhs, rhs) => ({ Add: [toId(lhs), toTypedExpresion(rhs)] });
  *
  * @returns {object} {Bar: [{Id: string}, object]}
  */
-const bar = (lhs, rhs) => ({ Bar: [toId(lhs), toTypedExpresion(rhs)] });
+const bar = ([lhs, rhs]) => ({ Bar: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Performs vectorized division.
@@ -284,7 +284,7 @@ const bar = (lhs, rhs) => ({ Bar: [toId(lhs), toTypedExpresion(rhs)] });
  *
  * @returns {object} {Div: [{Id: string}, object]}
  */
-const div = (lhs, rhs) => ({ Div: [toId(lhs), toTypedExpresion(rhs)] });
+const div = ([lhs, rhs]) => ({ Div: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Calculates the exponential moving average.
@@ -296,7 +296,7 @@ const div = (lhs, rhs) => ({ Div: [toId(lhs), toTypedExpresion(rhs)] });
  *
  * @returns {object} {Ema: [{Id: string}, number]}
  */
-const ema = (id, alpha) => ({ Ema: [toId(id), int(alpha)] });
+const ema = ([id, alpha]) => ({ Ema: [toId(id), int(alpha)] });
 
 /**
  * Filters equal values.
@@ -308,7 +308,7 @@ const ema = (id, alpha) => ({ Ema: [toId(id), int(alpha)] });
  *
  * @returns {object} {Eq: [{Id: string}, object]}
  */
-const eq = (lhs, rhs) => ({ Eq: [toId(lhs), toTypedExpresion(rhs)] });
+const eq = ([lhs, rhs]) => ({ Eq: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Filters greater values.
@@ -320,7 +320,7 @@ const eq = (lhs, rhs) => ({ Eq: [toId(lhs), toTypedExpresion(rhs)] });
  *
  * @returns {object} {Gt: [{Id: string}, object]}
  */
-const gt = (lhs, rhs) => ({ Gt: [toId(lhs), toTypedExpresion(rhs)] });
+const gt = ([lhs, rhs]) => ({ Gt: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Filters greater or equal values.
@@ -332,7 +332,7 @@ const gt = (lhs, rhs) => ({ Gt: [toId(lhs), toTypedExpresion(rhs)] });
  *
  * @returns {object} {Gte: [{Id: string}, object]}
  */
-const gte = (lhs, rhs) => ({ Gte: [toId(lhs), toTypedExpresion(rhs)] });
+const gte = ([lhs, rhs]) => ({ Gte: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Filters lesser values.
@@ -344,7 +344,7 @@ const gte = (lhs, rhs) => ({ Gte: [toId(lhs), toTypedExpresion(rhs)] });
  *
  * @returns {object} {Lt: [{Id: string}, object]}
  */
-const lt = (lhs, rhs) => ({ Lt: [toId(lhs), toTypedExpresion(rhs)] });
+const lt = ([lhs, rhs]) => ({ Lt: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Filters lesser or equal values.
@@ -356,7 +356,7 @@ const lt = (lhs, rhs) => ({ Lt: [toId(lhs), toTypedExpresion(rhs)] });
  *
  * @returns {object} {Lte: [{Id: string}, object]}
  */
-const lte = (lhs, rhs) => ({ Lte: [toId(lhs), toTypedExpresion(rhs)] });
+const lte = ([lhs, rhs]) => ({ Lte: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Calculates the moving average.
@@ -368,7 +368,7 @@ const lte = (lhs, rhs) => ({ Lte: [toId(lhs), toTypedExpresion(rhs)] });
  *
  * @returns {object} {MAvg: [{Id: string}, number]}
  */
-const mavg = (id, lookback) => ({ MAvg: [toId(id), int(lookback)] });
+const mavg = ([id, lookback]) => ({ MAvg: [toId(id), int(lookback)] });
 
 /**
  * Calculates the moving standard deviation.
@@ -380,7 +380,7 @@ const mavg = (id, lookback) => ({ MAvg: [toId(id), int(lookback)] });
  *
  * @returns {object} {MDev: [{Id: string}, number]}
  */
-const mdev = (id, lookback) => ({ MDev: [toId(id), int(lookback)] });
+const mdev = ([id, lookback]) => ({ MDev: [toId(id), int(lookback)] });
 
 /**
  * Performs vectorized multiplication.
@@ -392,7 +392,7 @@ const mdev = (id, lookback) => ({ MDev: [toId(id), int(lookback)] });
  *
  * @returns {object} {Mul: [{Id: string}, object]}
  */
-const mul = (lhs, rhs) => ({ Mul: [toId(lhs), toTypedExpresion(rhs)] });
+const mul = ([lhs, rhs]) => ({ Mul: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Filters not equal values.
@@ -404,7 +404,7 @@ const mul = (lhs, rhs) => ({ Mul: [toId(lhs), toTypedExpresion(rhs)] });
  *
  * @returns {object} {Neq: [{Id: string}, object]}
  */
-const neq = (lhs, rhs) => ({ Neq: [toId(lhs), toTypedExpresion(rhs)] });
+const neq = ([lhs, rhs]) => ({ Neq: [toId(lhs), toTypedExpresion(rhs)] });
 
 /**
  * Performs vectorized subtraction.
@@ -416,7 +416,7 @@ const neq = (lhs, rhs) => ({ Neq: [toId(lhs), toTypedExpresion(rhs)] });
  *
  * @returns {object} {Sub: [{Id: string}, object]}
  */
-const sub = (lhs, rhs) => ({ Sub: [toId(lhs), toTypedExpresion(rhs)] });
+const sub = ([lhs, rhs]) => ({ Sub: [toId(lhs), toTypedExpresion(rhs)] });
 
 // Helpers
 
@@ -425,6 +425,13 @@ const toId = arg => {
         arg = id(arg);
     }
     return arg;
+};
+
+const toTable = name => {
+    if (isString(name)) {
+        name = { Table: name };
+    }
+    return name;
 };
 
 const toTypedExpresion = arg => {
@@ -475,5 +482,7 @@ module.exports = {
     time,
     unique,
     variance,
-    year
+    year,
+    toId,
+    toTable
 };
