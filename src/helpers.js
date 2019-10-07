@@ -10,7 +10,10 @@ const processQueryArgs = cmd => {
             continue;
         }
 
-        cmd[key] = processFunctions(cmd[key]);
+        cmd[key] = toArgsArray(cmd[key]);
+        for (let i = 0; i < cmd[key].length; i++) {
+            cmd[key][i] = processFunctions(cmd[key][i]);
+        }
         cmd[key] = processStringArgs(cmd[key]);
     }
 
@@ -25,8 +28,6 @@ const processQueryArgs = cmd => {
 const processDeleteArgs = cmd => toArgsArray(cmd);
 
 const processStringArgs = cmd => {
-    cmd = toArgsArray(cmd);
-
     for (let i = 0; i < cmd.length; i++) {
         if (isString(cmd[i])) {
             cmd[i] = f.toId(cmd[i]);
@@ -78,11 +79,10 @@ const processFunctions = cmd => {
     };
 
     let translatedCmd = cmd;
-    if (typeof cmd === "object") {
-        translatedCmd = [];
+    if (!isArray(cmd) && typeof cmd === "object") {
         for (const prop in cmd) {
             if (prop in unaryFunctions) {
-                translatedCmd.push(unaryFunctions[prop](cmd[prop]));
+                translatedCmd = unaryFunctions[prop](cmd[prop]);
             } else if (prop in binaryFunctions) {
                 if (!isArray(cmd[prop]) || cmd[prop].length < 2) {
                     throw new Error(`missing argument in ${prop} function`);
@@ -90,7 +90,7 @@ const processFunctions = cmd => {
                 for (let i = 0; i < cmd[prop].length; i++) {
                     cmd[prop][i] = processFunctions(cmd[prop][i]);
                 }
-                translatedCmd.push(binaryFunctions[prop](cmd[prop]));
+                translatedCmd = binaryFunctions[prop](cmd[prop]);
             }
         }
     }
@@ -107,7 +107,24 @@ const toArgsArray = cmd => {
 
 // Others
 
+const fixUrl = url => {
+    url = url.trim().replace(/\s/g, "");
+
+    if (/^(:\/\/)/.test(url)) {
+        url = `http${url}`;
+    } else if (!/^(f|ht)tps?:\/\//i.test(url)) {
+        url = `http://${url}`;
+    }
+
+    if (!url.endsWith("/")) {
+        url += "/";
+    }
+
+    return url;
+};
+
 module.exports = {
     processQueryArgs,
-    processDeleteArgs
+    processDeleteArgs,
+    fixUrl
 };

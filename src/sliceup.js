@@ -1,16 +1,14 @@
 const axios = require("axios");
 const { QueryData } = require("./queryData.js");
-const { processDeleteArgs, processQueryArgs } = require("./helpers");
+const { fixUrl, processDeleteArgs, processQueryArgs } = require("./helpers");
 
 /**
  * Creates a Sliceup client object.
  *
- * @param {string} ip            Connection ip address.
- * @param {string} [port='8080'] Connection port.
+ * @param {string} host          Connection host.
  */
-const Sliceup = (ip, port) => {
-    port = typeof port !== "undefined" ? port : "8080";
-    const host = `http://${ip}:${port}/`;
+const Sliceup = host => {
+    host = fixUrl(host);
 
     const instance = {
         /**
