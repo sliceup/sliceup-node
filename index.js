@@ -1,65 +1,8 @@
-const { Sliceup } = require("./src/sliceup");
-const {
-    id,
-    last,
-    sum,
-    str,
-    bar,
-    time,
-    unique,
-    max,
-    eq,
-    float,
-    datetime,
-    dev,
-    neq,
-    month,
-    lt,
-    count,
-    variance,
-    alias,
-    gte,
-    lte,
-    avg,
-    min,
-    bool,
-    year,
-    sums,
-    gt,
-    int
-} = require("./src/functions.js");
-
+const { Sliceup } = require("./src/sliceup.js");
 /**
  * Sliceup client.
  * @module sliceup
  */
 module.exports = {
-    Sliceup,
-    id,
-    alias,
-    avg,
-    bar,
-    bool,
-    count,
-    datetime,
-    dev,
-    eq,
-    float,
-    gt,
-    gte,
-    int,
-    last,
-    lt,
-    lte,
-    max,
-    min,
-    month,
-    neq,
-    str,
-    sum,
-    sums,
-    time,
-    unique,
-    variance,
-    year
+    Sliceup
 };

@@ -1,67 +1,74 @@
-const { Sliceup, count, bar, time } = require("./index.js");
+const { Sliceup } = require("./index.js");
 
 console.log("Welcome to SliceUp client!");
 
-const sliceup = new Sliceup("demo.sliceup.co");
+const sliceup = Sliceup("demo.sliceup.co");
 
-sliceup
-    .summary()
-    .then(response => console.log(response))
-    .catch(error => console.error(error));
+const main = async () => {
+    try {
+        let result = await sliceup.summary();
 
-sliceup
-    .create({
-        name: "orders",
-        columns: [
-            { name: "time", type: "time" },
-            { name: "qty", type: "int" },
-            { name: "price", type: "float" }
-        ],
-        recreate: true
-    })
-    .then(response => console.log(response))
-    .catch(error => console.error(error));
+        console.log("Summary:");
+        console.log(result);
 
-sliceup
-    .insert({
-        name: "orders",
-        rows: [
-            { time: "00:00:00", qty: 2, price: 9.0 },
-            { time: "00:30:09", qty: 2, price: 2.0 },
-            { time: "01:45:01", qty: 4, price: 1.0 },
-            { time: "12:10:33", qty: 10, price: 16.0 },
-            { time: "16:00:09", qty: 4, price: 8.0 },
-            { time: "22:00:00", qty: 4, price: 23.0 },
-            { time: "22:31:49", qty: 4, price: 45.0 },
-            { time: "22:59:19", qty: 4, price: 17.0 }
-        ]
-    })
-    .then(response => console.log(response))
-    .catch(error => console.error(error));
+        result = await sliceup.create({
+            name: "orders",
+            columns: [
+                { name: "time", type: "time" },
+                { name: "qty", type: "int" },
+                { name: "price", type: "float" }
+            ],
+            recreate: true
+        });
 
-sliceup
-    .query({
-        select: ["time", "qty", "price"],
-        from: "orders"
-    })
-    .then(response => console.log(response))
-    .catch(error => console.error(error));
+        console.log("\nTable 'orders' (re)created:");
+        console.log(result);
 
-sliceup
-    .query({
-        select: count("price"),
-        by: bar("time", time(1, 0, 0)),
-        from: "orders"
-    })
-    .then(response => console.log(response))
-    .catch(error => console.error(error));
+        result = await sliceup.insert({
+            name: "orders",
+            rows: [
+                { time: "00:00:00", qty: 2, price: 9.0 },
+                { time: "00:30:09", qty: 2, price: 2.0 },
+                { time: "01:45:01", qty: 4, price: 1.0 },
+                { time: "12:10:33", qty: 10, price: 16.0 },
+                { time: "16:00:09", qty: 4, price: 8.0 },
+                { time: "22:00:00", qty: 4, price: 23.0 },
+                { time: "22:31:49", qty: 4, price: 45.0 },
+                { time: "22:59:19", qty: 4, price: 17.0 }
+            ]
+        });
+        console.log(`\nInserted ${result} rows`);
 
-sliceup
-    .delete("orders")
-    .then(response => console.log(response))
-    .catch(error => console.error(error));
+        result = await sliceup.query({
+            select: ["time", "qty", "price"],
+            from: "orders"
+        });
 
-sliceup
-    .summary()
-    .then(response => console.log(response))
-    .catch(error => console.error(error));
+        console.log("\nSelect 'time', 'qty' and 'price' columns from 'orders' table:");
+        console.log(result);
+
+        result = await sliceup.query({
+            select: [{ count: "price" }, { sum: "qty" }],
+            by: { bar: ["time", { time: [1, 0, 0] }] },
+            from: "orders"
+        });
+
+        console.log(
+            "\nSelect 'count(time)', 'sum(qty)' by 'time(1, 0, 0)' buckets of 'time' column from 'orders' table:"
+        );
+        console.log(result);
+
+        result = await sliceup.delete("orders");
+
+        console.log(`\nDeleted 'orders' table: ${result}`);
+
+        result = await sliceup.summary();
+
+        console.log("Summary:");
+        console.log(result);
+    } catch (e) {
+        console.error(e);
+    }
+};
+
+main();
