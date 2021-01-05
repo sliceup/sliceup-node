@@ -24,7 +24,7 @@
   "homepage": "https://github.com/sliceup/sliceup-node#readme",
   "dependencies": {
     "@runkit/value-viewer": "^1.0.0",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "do-wrapper": "^3.22.1",
     "request": "^2.88.0"
   },
